@@ -1,24 +1,22 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
 
-public class LevelLoader : MonoBehaviour
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace Assets._scripts
 {
-    // Use this for initialization
-    void Start()
+    public class LevelLoader : MonoBehaviour
     {
-    }
+        [UsedImplicitly]
+        public void LevelLoad(string levelName)
+        {
+            SceneManager.LoadSceneAsync(levelName);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    public void LevelLoad(string levelName)
-    {
-        Application.LoadLevel(levelName);
-    }
-
-    public void CloseGame()
-    {
-        Application.Quit();
+        [UsedImplicitly]
+        public void CloseGame()
+        {
+            Application.Quit();
+        }
     }
 }
