@@ -9,7 +9,7 @@ public class Ship : MonoBehaviour
     public GameObject collidedShip;
     public GameObject bullet;
     public GameObject bulletPool;
-    public Pilot pilot;
+    public IPilot pilot;
     public bool fireBullets = true;
     public bool gameOver = false;
     public HUDManager hud;

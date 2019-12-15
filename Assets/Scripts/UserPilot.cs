@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class UserPilot : Pilot
+public class UserPilot : IPilot
 {
     private SoundManager soundManager;
     private GameObject camera;

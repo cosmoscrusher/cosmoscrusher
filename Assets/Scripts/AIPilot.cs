@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AIPilot : Pilot
+public class AIPilot : IPilot
 {
     public float secondsToChange = 2.0f;
     public float distanceToAttack = 20.0f;
@@ -88,13 +88,13 @@ public class AIPilot : Pilot
         }
     }
 
-    private Bullet GetNonActiveBullet(GameObject bulletPool)
+    public Bullet GetNonActiveBullet(GameObject bulletPool)
     {
         for (int i = 0; i < bulletPool.transform.childCount; ++i)
         {
             if (!bulletPool.transform.GetChild(i).gameObject.activeSelf)
             {
-                Bullet bill = bulletPool.transform.GetChild(i).GetComponent<Bullet>() as Bullet;
+                Bullet bill = bulletPool.transform.GetChild(i).GetComponent<Bullet>();
                 bill.transform.rotation = new Quaternion();
                 return bill;
             }

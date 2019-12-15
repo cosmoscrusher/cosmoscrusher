@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HowToPilot : Pilot
+public class HowToPilot : IPilot
 {
     public void MoveShip(GameObject ship)
     {
