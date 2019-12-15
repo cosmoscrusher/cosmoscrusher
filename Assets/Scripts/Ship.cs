@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 
-public class Ship : MonoBehaviour 
+using UnityEngine;
+
+public class Ship : MonoBehaviour
 {
     public int tier;
     public int health;
@@ -31,6 +31,7 @@ public class Ship : MonoBehaviour
             {
                 return;
             }
+
             pilot.MoveShip(gameObject);
 
             if (pilot is UserPilot && Input.GetMouseButton(0))
@@ -68,6 +69,7 @@ public class Ship : MonoBehaviour
             }
         }
     }
+
     public void HitAnimation(int damage)
     {
         health -= damage;
@@ -75,21 +77,25 @@ public class Ship : MonoBehaviour
         {
             bossHud.lostHealth(damage);
         }
+
         StartCoroutine(Hit());
     }
+
     public IEnumerator Hit()
     {
         gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = hitMaterial;
-        yield return new WaitForSeconds(.1f);       
+        yield return new WaitForSeconds(.1f);
         gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = material;
         invulnerable = false;
     }
+
     public IEnumerator Countdown()
     {
         WaitForSeconds delay = new WaitForSeconds(.125f);
         yield return delay;
         fireBullets = true;
     }
+
     void OnCollisionEnter(Collision collision)
     {
         if (pilot is UserPilot || pilot is HowToPilot)
@@ -103,6 +109,7 @@ public class Ship : MonoBehaviour
                     {
                         hud.enemyDestroyed();
                     }
+
                     tier++;
 
                     //put health to full and increase size                    
@@ -120,18 +127,17 @@ public class Ship : MonoBehaviour
         {
             if (collision.gameObject.layer == 8)
             {
-
-            }            
+            }
         }
     }
 
     public bool CollidedWithValidEnemy()
     {
-        if(collidedShip != null)
+        if (collidedShip != null)
         {
             return true;
         }
-        
+
         return false;
     }
 }

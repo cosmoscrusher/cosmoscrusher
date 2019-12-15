@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-public class SoundManager : MonoBehaviour {
+using UnityEngine;
 
+public class SoundManager : MonoBehaviour
+{
     private List<AudioSource> audioSources = new List<AudioSource>();
     public AudioSource audioPrefab;
     public float volume;
@@ -15,14 +15,16 @@ public class SoundManager : MonoBehaviour {
     public AudioClip menuBackground;
     public AudioClip planetBackground;
     public AudioClip bossBackground;
+
     private bool paused = false;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () 
+
+    // Use this for initialization
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         if (!paused)
         {
@@ -34,13 +36,14 @@ public class SoundManager : MonoBehaviour {
                     finishedSources.Add(source);
                 }
             }
+
             foreach (AudioSource source in finishedSources)
             {
                 audioSources.Remove(source);
                 Destroy(source.gameObject);
             }
         }
-	}
+    }
 
     public void PlayBulletFire()
     {
@@ -88,6 +91,7 @@ public class SoundManager : MonoBehaviour {
         source.Play();
         audioSources.Add(source);
     }
+
     public void PauseSounds()
     {
         paused = true;
@@ -96,6 +100,7 @@ public class SoundManager : MonoBehaviour {
             source.Pause();
         }
     }
+
     public void UnPauseSounds()
     {
         paused = false;
@@ -104,14 +109,17 @@ public class SoundManager : MonoBehaviour {
             source.UnPause();
         }
     }
+
     public void PlayMenuBackground()
     {
         PlayBackground(menuBackground, 0.3f, 1.0f);
     }
+
     public void PlayPlanetBackground()
     {
         PlayBackground(planetBackground, 0.1f, 1.0f);
     }
+
     public void PlayBossBackground()
     {
         PlayBackground(bossBackground, 0.3f, 1.0f);

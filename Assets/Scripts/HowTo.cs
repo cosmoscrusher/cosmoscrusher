@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
+﻿using System.Collections;
 
-public class HowTo : MonoBehaviour 
+using UnityEngine;
+using UnityEngine.UI;
+
+public class HowTo : MonoBehaviour
 {
     private float speed = 20.0f;
     public GameObject shipExplosion;
@@ -26,10 +27,11 @@ public class HowTo : MonoBehaviour
     private UserPilot playerPilot;
     private bool end;
     private bool changed = false;
+
     void Start()
     {
         playerShip.pilot = new UserPilot(speed, cam, blueMat, false, soundManager);
-        playerPilot = (UserPilot)playerShip.pilot;
+        playerPilot = (UserPilot) playerShip.pilot;
         playerShip.fireBullets = false;
         playerShip.bulletPool = bulletPool;
         playerShip.tier = 1;
@@ -49,6 +51,7 @@ public class HowTo : MonoBehaviour
         textIndicator.canvasRenderer.SetAlpha(0.0f);
         soundManager.PlayPlanetBackground();
     }
+
     void Update()
     {
         IndicatorColorChange();
@@ -61,6 +64,7 @@ public class HowTo : MonoBehaviour
                 StartCoroutine(playerShip.Countdown());
             }
         }
+
         if (playerShip.CollidedWithValidEnemy())
         {
             if (playerShip.collidedShip == enemyShipOne.gameObject)
@@ -72,6 +76,7 @@ public class HowTo : MonoBehaviour
                 enemyShipTwo = enemyShipOne;
                 enemyShipOne = null;
             }
+
             playerShip.collidedShip.GetComponent<Ship>().pilot = playerShip.pilot;
             Ship validEnemy = playerShip.collidedShip.GetComponent<Ship>();
             validEnemy.gameObject.transform.rotation = playerShip.gameObject.transform.rotation;
@@ -96,6 +101,7 @@ public class HowTo : MonoBehaviour
             soundManager.PlayShipTakeover();
             ChangeText();
         }
+
         hud.checkHealth(playerShip.health);
         if (!changed && playerShip.health < 5)
         {
@@ -103,6 +109,7 @@ public class HowTo : MonoBehaviour
             playerShip.fireBullets = true;
             changed = true;
         }
+
         if (enemyShipTwo != null && enemyShipTwo.health <= 0)
         {
             GameObject shipDeath = Instantiate(shipExplosion) as GameObject;
@@ -112,19 +119,21 @@ public class HowTo : MonoBehaviour
             system.Play();
             Destroy(enemyShipTwo.gameObject);
             soundManager.PlayShipDestruction();
-            StartCoroutine(Pause()); 
+            StartCoroutine(Pause());
         }
-        
+
         if (end)
         {
             Application.LoadLevel("MainMenu");
         }
     }
+
     private void fadeIndicator(Image indicator)
     {
         indicator.canvasRenderer.SetAlpha(1.0f);
         indicator.CrossFadeAlpha(0.0f, 0.75f, false);
     }
+
     private void GenerateBullets()
     {
         int numBullets = 100;
@@ -135,27 +144,35 @@ public class HowTo : MonoBehaviour
             theBullet.gameObject.SetActive(false);
         }
     }
+
     IEnumerator Pause()
     {
         WaitForSeconds delay = new WaitForSeconds(1.0f);
         yield return delay;
         end = true;
     }
+
     void ChangeText()
     {
         text.text = "Now, seek out the red ship and run into it.";
         fadeIndicator(textIndicator);
     }
+
     void ChangeText2()
     {
         text.text = "Running into a red ship damages you. Destroy the red ship by holding fire and aiming at it.";
         fadeIndicator(textIndicator);
     }
+
     void LateUpdate()
     {
-        cam.transform.position = playerShip.gameObject.transform.position + Vector3.Normalize(playerShip.gameObject.transform.position) * 60;
-        cam.transform.rotation = Quaternion.LookRotation(playerShip.gameObject.transform.position - cam.transform.position, playerShip.transform.up.normalized);
+        cam.transform.position = playerShip.gameObject.transform.position +
+                                 Vector3.Normalize(playerShip.gameObject.transform.position) * 60;
+        cam.transform.rotation =
+            Quaternion.LookRotation(playerShip.gameObject.transform.position - cam.transform.position,
+                playerShip.transform.up.normalized);
     }
+
     private void IndicatorColorChange()
     {
         float distance = ClosestShipDistance();
@@ -167,20 +184,27 @@ public class HowTo : MonoBehaviour
     {
         float closestEnemy = planet.transform.lossyScale.x;
         GameObject enemy = null;
-        if (enemyShipOne != null && Vector3.Distance(playerShip.transform.position, enemyShipOne.gameObject.transform.position) < closestEnemy)
+        if (enemyShipOne != null &&
+            Vector3.Distance(playerShip.transform.position, enemyShipOne.gameObject.transform.position) < closestEnemy)
         {
             closestEnemy = Vector3.Distance(playerShip.transform.position, enemyShipOne.gameObject.transform.position);
             enemy = enemyShipOne.gameObject;
         }
-        if (enemyShipTwo != null && Vector3.Distance(playerShip.transform.position, enemyShipTwo.gameObject.transform.position) < closestEnemy)
+
+        if (enemyShipTwo != null &&
+            Vector3.Distance(playerShip.transform.position, enemyShipTwo.gameObject.transform.position) < closestEnemy)
         {
             closestEnemy = Vector3.Distance(playerShip.transform.position, enemyShipTwo.gameObject.transform.position);
             enemy = enemyShipTwo.gameObject;
         }
+
         if (enemy != null)
         {
-            hud.rotateTracker(playerShip.gameObject.transform.position, enemy.gameObject.transform.position, playerShip.transform.forward, playerShip.transform.right, -playerShip.transform.up, enemy.GetComponent<Ship>().material.color);
+            hud.rotateTracker(playerShip.gameObject.transform.position, enemy.gameObject.transform.position,
+                playerShip.transform.forward, playerShip.transform.right, -playerShip.transform.up,
+                enemy.GetComponent<Ship>().material.color);
         }
+
         return closestEnemy;
     }
 }

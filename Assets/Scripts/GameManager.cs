@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+
+using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverLose;
     public GameObject gameOverWin;
     public GameObject pauseScreen;
-       
+
     public GameObject planet;
     public float speed;
     public GameObject cam;
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         //tier count * 20
         //20 * 20
-        int numBullets = 50 * (numShipPerTier * 2);
+        int numBullets = 50 * numShipPerTier * 2;
         for (int i = 0; i < numBullets; ++i)
         {
             Bullet theBullet = Object.Instantiate(bullet.GetComponent<Bullet>()) as Bullet;
@@ -73,16 +73,20 @@ public class GameManager : MonoBehaviour
             {
                 Ship ship = CreateShip(tierPrefabs[currentTier - 1], currentTier);
                 activeShips.Add(ship);
-                axes.Add(Vector3.Normalize(new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f))));
+                axes.Add(Vector3.Normalize(new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f),
+                    Random.Range(-1.0f, 1.0f))));
             }
+
             ++currentTier;
         }
     }
 
     private Ship CreatePlayerShip(Ship prefab, int tier)
     {
-        float distanceFromPlanet = (planet.transform.lossyScale.x / 2) + 1.0f;
-        Vector3 position = Vector3.Normalize(new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f))) * distanceFromPlanet;
+        float distanceFromPlanet = planet.transform.lossyScale.x / 2 + 1.0f;
+        Vector3 position =
+            Vector3.Normalize(new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f),
+                Random.Range(-1.0f, 1.0f))) * distanceFromPlanet;
         Ship ship = Instantiate(prefab) as Ship;
         ship.gameObject.layer = 8;
         ship.health = 5;
@@ -102,12 +106,13 @@ public class GameManager : MonoBehaviour
 
     private Ship CreateShip(Ship prefab, int tier)
     {
-        float distanceFromPlanet = (planet.transform.lossyScale.x / 2) + 1.0f;
+        float distanceFromPlanet = planet.transform.lossyScale.x / 2 + 1.0f;
         bool goodPosition = false;
         Vector3 position = new Vector3();
         while (!goodPosition)
         {
-            position = Vector3.Normalize(new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f))) * distanceFromPlanet;
+            position = Vector3.Normalize(new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f),
+                           Random.Range(-1.0f, 1.0f))) * distanceFromPlanet;
             if (Vector3.Distance(playerShip.transform.position, position) > planet.transform.lossyScale.x / 8)
             {
                 goodPosition = true;
@@ -120,7 +125,7 @@ public class GameManager : MonoBehaviour
         ship.transform.position = position;
         ship.transform.rotation = Quaternion.LookRotation(Vector3.zero - position);
         ship.bullet = bullet;
-        ship.tier = tier;       
+        ship.tier = tier;
         ship.hud = hud;
         ship.bulletPool = bulletPool;
         if (ship.tier - playerShip.tier == 1)
@@ -132,6 +137,7 @@ public class GameManager : MonoBehaviour
         {
             ship.material = enemyMaterial;
         }
+
         ship.pilot = new AIPilot(speed * .675f, ship.material);
         ship.hitMaterial = enemyHitMaterial;
         return ship;
@@ -160,7 +166,9 @@ public class GameManager : MonoBehaviour
                 color = enemy.material.color;
             }
         }
-        hud.rotateTracker(playerPosition, closestEnemyPosition, playerShip.transform.forward, playerShip.transform.right, -playerShip.transform.up, color);
+
+        hud.rotateTracker(playerPosition, closestEnemyPosition, playerShip.transform.forward,
+            playerShip.transform.right, -playerShip.transform.up, color);
         return closestEnemy;
     }
 
@@ -174,9 +182,12 @@ public class GameManager : MonoBehaviour
     {
         if (!gameOver)
         {
-            cam.transform.position = playerShip.gameObject.transform.position + Vector3.Normalize(playerShip.gameObject.transform.position) * 60;
-            cam.transform.rotation = Quaternion.LookRotation(playerShip.gameObject.transform.position - cam.transform.position, playerShip.transform.up.normalized);
-        }        
+            cam.transform.position = playerShip.gameObject.transform.position +
+                                     Vector3.Normalize(playerShip.gameObject.transform.position) * 60;
+            cam.transform.rotation =
+                Quaternion.LookRotation(playerShip.gameObject.transform.position - cam.transform.position,
+                    playerShip.transform.up.normalized);
+        }
     }
 
     void Update()
@@ -198,23 +209,30 @@ public class GameManager : MonoBehaviour
             {
                 pauseGame();
             }
+
             if (currentTier <= tierPrefabs.Count - 1 && activeShips.Count <= numShipPerTier)
             {
                 for (int i = 0; i < numShipPerTier; i++)
                 {
                     Ship ship = CreateShip(tierPrefabs[currentTier - 1], currentTier);
                     activeShips.Add(ship);
-                    axes.Add(Vector3.Normalize(new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f))));
+                    axes.Add(Vector3.Normalize(new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f),
+                        Random.Range(-1.0f, 1.0f))));
                 }
-                ++currentTier; 
-                if (currentTier == tierPrefabs.Count) {
+
+                ++currentTier;
+                if (currentTier == tierPrefabs.Count)
+                {
                     hud.setTillNextTier(activeShips.Count, currentTier);
                 }
-                else {
+                else
+                {
                     hud.setTillNextTier(numShipPerTier, currentTier);
                 }
+
                 soundManager.PlayShipSpawn();
             }
+
             if (playerShip.CollidedWithValidEnemy())
             {
                 playerShip.collidedShip.GetComponent<Ship>().pilot = playerShip.pilot;
@@ -224,32 +242,37 @@ public class GameManager : MonoBehaviour
                 playerShip = validEnemy;
                 activeShips.Remove(validEnemy);
                 playerShip.gameObject.layer = 8;
-                playerShip.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = playerMaterial;
+                playerShip.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material =
+                    playerMaterial;
                 playerShip.invulnerable = true;
                 playerShip.material = playerMaterial;
                 playerShip.hitMaterial = playerHitMaterial;
                 StartCoroutine(InvinciFrames());
                 hud.setTier(playerShip.tier);
-                if(playerShip.tier == tierPrefabs.Count)
+                if (playerShip.tier == tierPrefabs.Count)
                 {
                     playerShip.color = 1;
                 }
+
                 foreach (Ship ship in activeShips)
                 {
-                    AIPilot pilot = (AIPilot)ship.pilot;
+                    AIPilot pilot = (AIPilot) ship.pilot;
                     if (ship.tier - playerShip.tier == 1)
                     {
                         ship.material = nextTierMaterial;
-                        ship.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = nextTierMaterial;
+                        ship.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material =
+                            nextTierMaterial;
                         pilot.ChangeBulletMaterial(nextTierMaterial);
                     }
                     else
                     {
                         ship.material = enemyMaterial;
-                        ship.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = enemyMaterial;
+                        ship.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material =
+                            enemyMaterial;
                         pilot.ChangeBulletMaterial(enemyMaterial);
                     }
                 }
+
                 GameObject shipDeath = Instantiate(shipExplosion) as GameObject;
                 ParticleSystem system = shipDeath.transform.GetComponentInChildren<ParticleSystem>();
                 system.transform.position = playerShip.transform.position;
@@ -271,6 +294,7 @@ public class GameManager : MonoBehaviour
                     system.Play();
                 }
             }
+
             foreach (Ship ship in destroyedShips)
             {
                 activeShips.Remove(ship);
@@ -278,6 +302,7 @@ public class GameManager : MonoBehaviour
                 hud.enemyDestroyed();
                 soundManager.PlayShipDestruction();
             }
+
             hud.checkHealth(playerShip.health);
             IndicatorColorChange();
             if (playerShip.health <= 0)
@@ -295,6 +320,7 @@ public class GameManager : MonoBehaviour
                 {
                     ship.gameOver = true;
                 }
+
                 soundManager.PlayShipDestruction();
             }
             else if (activeShips.Count == 0 && !finalShip)
@@ -302,7 +328,8 @@ public class GameManager : MonoBehaviour
                 soundManager.PlayShipSpawn();
                 Ship ship = CreateShip(tierPrefabs[currentTier - 1], currentTier);
                 activeShips.Add(ship);
-                axes.Add(Vector3.Normalize(new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f))));
+                axes.Add(Vector3.Normalize(new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f),
+                    Random.Range(-1.0f, 1.0f))));
                 hud.setFinalTilNextTier();
                 finalShip = true;
             }
@@ -316,13 +343,13 @@ public class GameManager : MonoBehaviour
         }
         else if (win)
         {
-           timePassed += Time.deltaTime;
-           Vector3 leftDirection = Vector3.Normalize(-playerShip.transform.right) * speed * Time.deltaTime;
-           playerShip.transform.RotateAround(Vector3.zero, leftDirection, -speed * Time.deltaTime);
-           if (timePassed >= secondsToPortal)
-           {
-               Application.LoadLevel("BossScene");
-           }
+            timePassed += Time.deltaTime;
+            Vector3 leftDirection = Vector3.Normalize(-playerShip.transform.right) * speed * Time.deltaTime;
+            playerShip.transform.RotateAround(Vector3.zero, leftDirection, -speed * Time.deltaTime);
+            if (timePassed >= secondsToPortal)
+            {
+                Application.LoadLevel("BossScene");
+            }
         }
     }
 
@@ -334,9 +361,12 @@ public class GameManager : MonoBehaviour
         {
             s.paused = true;
         }
-        foreach (Bullet b in bulletPool.GetComponentsInChildren<Bullet>()) {
+
+        foreach (Bullet b in bulletPool.GetComponentsInChildren<Bullet>())
+        {
             b.paused = true;
         }
+
         playerShip.paused = true;
         soundManager.PauseSounds();
     }
@@ -349,10 +379,12 @@ public class GameManager : MonoBehaviour
         {
             s.paused = false;
         }
+
         foreach (Bullet b in bulletPool.GetComponentsInChildren<Bullet>())
         {
             b.paused = false;
         }
+
         playerShip.paused = false;
         soundManager.UnPauseSounds();
     }
@@ -373,6 +405,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(s);
         }
+
         activeShips = new List<Ship>();
         gameOver = false;
         SpawnShips();

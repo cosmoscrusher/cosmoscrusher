@@ -1,12 +1,13 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 
-public class BossFight : MonoBehaviour 
+using UnityEngine;
+
+public class BossFight : MonoBehaviour
 {
     public SoundManager soundManager;
     public GameObject theBoss;
     public GameObject bullet;
-    
+
     public Material bulletMaterial;
     public Material greenMaterial;
     public Material blueMaterial;
@@ -45,13 +46,13 @@ public class BossFight : MonoBehaviour
     bool paused = false;
     private bool phaseShifted = false;
     private bool shiftStarted = false;
-    
+
     void Awake()
     {
         Application.targetFrameRate = 60;
     }
 
-	void Start () 
+    void Start()
     {
         rateOfChangeOfAngles = 55.0f;
         angleOfBullets1 = 0;
@@ -62,7 +63,7 @@ public class BossFight : MonoBehaviour
         GenerateBullets();
         StartCoroutine(StartDelay());
         soundManager.PlayBossBackground();
-	}
+    }
 
     private void GenerateBullets()
     {
@@ -76,28 +77,30 @@ public class BossFight : MonoBehaviour
         }
     }
 
-	
-	void Update () 
+
+    void Update()
     {
         if (gameOver)
         {
             return;
         }
+
         if (paused)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 unPause();
             }
-            else 
-            { 
-                return; 
+            else
+            {
+                return;
             }
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
             pauseGame();
         }
+
         if (!firing)
         {
             firing = true;
@@ -111,12 +114,12 @@ public class BossFight : MonoBehaviour
                 Flood();
             }
 
-            else if(phaseShifted)
+            else if (phaseShifted)
             {
                 Pulse();
             }
 
-            else if(!shiftStarted)
+            else if (!shiftStarted)
             {
                 StartCoroutine(changePhase());
             }
@@ -145,7 +148,7 @@ public class BossFight : MonoBehaviour
             gameOver = true;
             clearAllBullets();
         }
-	}
+    }
 
     private void clearAllBullets()
     {
@@ -164,6 +167,7 @@ public class BossFight : MonoBehaviour
         {
             b.paused = true;
         }
+
         soundManager.PauseSounds();
     }
 
@@ -175,6 +179,7 @@ public class BossFight : MonoBehaviour
         {
             b.paused = false;
         }
+
         paused = false;
         soundManager.UnPauseSounds();
     }
@@ -194,12 +199,12 @@ public class BossFight : MonoBehaviour
             BossPhase1();
         }
 
-        else if(phaseShifted)
+        else if (phaseShifted)
         {
             BossFire();
         }
-        
-        firing = false;        
+
+        firing = false;
     }
 
     private Bullet GetNonActiveBullet()
@@ -213,35 +218,48 @@ public class BossFight : MonoBehaviour
                 bill.transform.rotation = new Quaternion();
                 return bill;
             }
+
             ++counter;
             if (counter >= numBullets)
             {
                 counter -= numBullets;
                 i -= numBullets;
             }
+
             ++j;
         }
+
         Debug.LogError("NOT Enough Bullets");
         return null;
     }
 
     void BossFire()
     {
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
 
         angleOfBullets1 %= 360;
         angleOfBullets2 %= 360;
-        angleOfBullets3 %= 360;      
+        angleOfBullets3 %= 360;
         angleOfBullets4 %= 360;
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
 
         angleOfBullets1 += rateOfChangeOfAngles * Time.deltaTime;
         angleOfBullets2 += rateOfChangeOfAngles * Time.deltaTime;
         angleOfBullets3 += rateOfChangeOfAngles * Time.deltaTime;
         angleOfBullets4 += rateOfChangeOfAngles * Time.deltaTime;
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Spin spin 1
         Bullet theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = bulletMaterial;
@@ -257,15 +275,26 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Transform bulletTransform = bullet.transform;
         //bulletTransform.Translate(Vector3.down * Time.deltaTime);
         Transform currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets1);
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Spin spin 2
         theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = bulletMaterial;
@@ -281,12 +310,19 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets2);
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Spin spin 3
         theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = bulletMaterial;
@@ -302,12 +338,19 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets3);
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Spin spin 4
         theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = bulletMaterial;
@@ -323,12 +366,19 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets4);
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Stationary 1
         theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = greenMaterial;
@@ -344,12 +394,19 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 45);
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Stationary 2
         theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = blueMaterial;
@@ -365,12 +422,19 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 135);
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Stationary 3
         theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = greenMaterial;
@@ -386,12 +450,19 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 225);
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Stationary 4
         theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = blueMaterial;
@@ -407,7 +478,10 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 315);
@@ -426,6 +500,7 @@ public class BossFight : MonoBehaviour
                 bulletLayer = 15;
                 bossLayer = 20;
             }
+
             for (float x = 0; x < 96; x++)
             {
                 Bullet theBullet = GetNonActiveBullet();
@@ -439,16 +514,22 @@ public class BossFight : MonoBehaviour
                 theBullet.angle = 3.75f * x;
                 theBullet.transform.position = theBoss.transform.position;
                 theBullet.gameObject.SetActive(true);
-                theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+                theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor =
+                    bulletMaterial.color;
                 theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                 theBoss.gameObject.GetComponent<Renderer>().material = bulletMaterial;
                 theBoss.gameObject.layer = bossLayer;
                 theBullet.GetComponent<Bullet>().startLife();
-                if (paused) { theBullet.paused = true; }
+                if (paused)
+                {
+                    theBullet.paused = true;
+                }
 
                 Transform currentTransform = theBullet.transform;
-                currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, theBullet.angle);
+                currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward,
+                    theBullet.angle);
             }
+
             pulse = false;
             pulseDelay = 0.0f;
         }
@@ -467,14 +548,20 @@ public class BossFight : MonoBehaviour
 
     void BossPhase1()
     {
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
 
         angleOfBullets1 %= 360;
         angleOfBullets2 %= 360;
         angleOfBullets3 %= 360;
         angleOfBullets4 %= 360;
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
 
         angleOfBullets1 += rateOfChangeOfAngles * Time.deltaTime;
         angleOfBullets2 += rateOfChangeOfAngles * Time.deltaTime;
@@ -497,7 +584,10 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         Transform currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 45);
@@ -517,7 +607,10 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 135);
@@ -537,7 +630,10 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 225);
@@ -557,7 +653,10 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 315);
@@ -577,15 +676,26 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Transform bulletTransform = bullet.transform;
         //bulletTransform.Translate(Vector3.down * Time.deltaTime);
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets1);
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Spin spin 2
         theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = greenMaterial;
@@ -601,12 +711,19 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets2);
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Spin spin 3
         theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = blueMaterial;
@@ -622,12 +739,19 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets3);
 
-        if (paused) { return; }
+        if (paused)
+        {
+            return;
+        }
+
         //Spin spin 4
         theBullet = GetNonActiveBullet();
         theBullet.gameObject.transform.GetComponent<Renderer>().material = greenMaterial;
@@ -643,7 +767,10 @@ public class BossFight : MonoBehaviour
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
         theBullet.GetComponent<Bullet>().startLife();
-        if (paused) { theBullet.paused = true; }
+        if (paused)
+        {
+            theBullet.paused = true;
+        }
 
         currentTransform = theBullet.transform;
         currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets4);
@@ -673,14 +800,20 @@ public class BossFight : MonoBehaviour
                         theBullet.angle = 3.75f * x;
                         theBullet.transform.position = theBoss.transform.position;
                         theBullet.gameObject.SetActive(true);
-                        theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+                        theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor =
+                            bulletMaterial.color;
                         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                         theBullet.GetComponent<Bullet>().startLife();
-                        if (paused) { theBullet.paused = true; }
+                        if (paused)
+                        {
+                            theBullet.paused = true;
+                        }
 
                         Transform currentTransform = theBullet.transform;
-                        currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, theBullet.angle);
+                        currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward,
+                            theBullet.angle);
                     }
+
                     for (float x = 37; x < 60; x++)
                     {
                         Bullet theBullet = GetNonActiveBullet();
@@ -694,13 +827,18 @@ public class BossFight : MonoBehaviour
                         theBullet.angle = 3.75f * x;
                         theBullet.transform.position = theBoss.transform.position;
                         theBullet.gameObject.SetActive(true);
-                        theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+                        theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor =
+                            bulletMaterial.color;
                         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                         theBullet.GetComponent<Bullet>().startLife();
-                        if (paused) { theBullet.paused = true; }
+                        if (paused)
+                        {
+                            theBullet.paused = true;
+                        }
 
                         Transform currentTransform = theBullet.transform;
-                        currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, theBullet.angle);
+                        currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward,
+                            theBullet.angle);
                     }
                 }
 
@@ -719,13 +857,18 @@ public class BossFight : MonoBehaviour
                         theBullet.angle = 3.75f * x;
                         theBullet.transform.position = theBoss.transform.position;
                         theBullet.gameObject.SetActive(true);
-                        theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+                        theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor =
+                            bulletMaterial.color;
                         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                         theBullet.GetComponent<Bullet>().startLife();
-                        if (paused) { theBullet.paused = true; }
+                        if (paused)
+                        {
+                            theBullet.paused = true;
+                        }
 
                         Transform currentTransform = theBullet.transform;
-                        currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, theBullet.angle);
+                        currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward,
+                            theBullet.angle);
                     }
 
                     for (float x = 61; x < 84; x++)
@@ -741,13 +884,18 @@ public class BossFight : MonoBehaviour
                         theBullet.angle = 3.75f * x;
                         theBullet.transform.position = theBoss.transform.position;
                         theBullet.gameObject.SetActive(true);
-                        theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+                        theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor =
+                            bulletMaterial.color;
                         theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                         theBullet.GetComponent<Bullet>().startLife();
-                        if (paused) { theBullet.paused = true; }
+                        if (paused)
+                        {
+                            theBullet.paused = true;
+                        }
 
                         Transform currentTransform = theBullet.transform;
-                        currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, theBullet.angle);
+                        currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward,
+                            theBullet.angle);
                     }
                 }
             }

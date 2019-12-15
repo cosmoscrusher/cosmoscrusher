@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Boss : MonoBehaviour 
+public class Boss : MonoBehaviour
 {
     public BossHUD bossHUD;
 
@@ -24,7 +23,7 @@ public class Boss : MonoBehaviour
         {
             Health -= damage;
         }
+
         bossHUD.hitEnemy(damage);
     }
-
 }

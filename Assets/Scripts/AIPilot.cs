@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class AIPilot : Pilot
 {
-
     public float secondsToChange = 2.0f;
     public float distanceToAttack = 20.0f;
 
@@ -47,25 +45,42 @@ public class AIPilot : Pilot
         {
             secondsPassed += Time.deltaTime;
         }
+
         Vector3 frontDirection = Vector3.Normalize(theTransform.transform.up) * speed * Time.deltaTime;
         Vector3 leftDirection = Vector3.Normalize(-theTransform.transform.right) * speed * Time.deltaTime;
         switch (randomDirection)
         {
-            case 0: theTransform.RotateAround(Vector3.zero, leftDirection, -speed * Time.deltaTime);
+            case 0:
+                theTransform.RotateAround(Vector3.zero, leftDirection, -speed * Time.deltaTime);
                 break;
-            case 1: theTransform.RotateAround(Vector3.zero, frontDirection, speed * Time.deltaTime);
+            case 1:
+                theTransform.RotateAround(Vector3.zero, frontDirection, speed * Time.deltaTime);
                 break;
-            case 2: theTransform.RotateAround(Vector3.zero, frontDirection, -speed * Time.deltaTime);
+            case 2:
+                theTransform.RotateAround(Vector3.zero, frontDirection, -speed * Time.deltaTime);
                 break;
-            case 3: theTransform.RotateAround(Vector3.zero, leftDirection, speed * Time.deltaTime);
+            case 3:
+                theTransform.RotateAround(Vector3.zero, leftDirection, speed * Time.deltaTime);
                 break;
-            case 4: theTransform.RotateAround(Vector3.zero, (leftDirection.normalized + frontDirection.normalized) * speed * Time.deltaTime, speed * Time.deltaTime);
+            case 4:
+                theTransform.RotateAround(Vector3.zero,
+                    (leftDirection.normalized + frontDirection.normalized) * speed * Time.deltaTime,
+                    speed * Time.deltaTime);
                 break;
-            case 5: theTransform.RotateAround(Vector3.zero, (leftDirection.normalized - frontDirection.normalized) * speed * Time.deltaTime, speed * Time.deltaTime);
+            case 5:
+                theTransform.RotateAround(Vector3.zero,
+                    (leftDirection.normalized - frontDirection.normalized) * speed * Time.deltaTime,
+                    speed * Time.deltaTime);
                 break;
-            case 6: theTransform.RotateAround(Vector3.zero, -(leftDirection.normalized + frontDirection.normalized) * speed * Time.deltaTime, speed * Time.deltaTime);
+            case 6:
+                theTransform.RotateAround(Vector3.zero,
+                    -(leftDirection.normalized + frontDirection.normalized) * speed * Time.deltaTime,
+                    speed * Time.deltaTime);
                 break;
-            case 7: theTransform.RotateAround(Vector3.zero, -(leftDirection.normalized - frontDirection.normalized) * speed * Time.deltaTime, speed * Time.deltaTime);
+            case 7:
+                theTransform.RotateAround(Vector3.zero,
+                    -(leftDirection.normalized - frontDirection.normalized) * speed * Time.deltaTime,
+                    speed * Time.deltaTime);
                 break;
             default:
                 Debug.LogError("The random number generator did not produce a number from 0 - 7");
@@ -84,9 +99,11 @@ public class AIPilot : Pilot
                 return bill;
             }
         }
+
         Debug.LogError("NOT Enough Bullets");
         return null;
     }
+
     public void Fire(GameObject ship, GameObject bullet, GameObject bulletPool)
     {
         if (ship.GetComponent<Ship>().tier == 1)
@@ -125,7 +142,7 @@ public class AIPilot : Pilot
             }
         }
 
-        if(ship.GetComponent<Ship>().tier == 2)
+        if (ship.GetComponent<Ship>().tier == 2)
         {
             if (fireTier2)
             {
@@ -220,7 +237,7 @@ public class AIPilot : Pilot
                 theBullet.transform.rotation = ship.transform.rotation;
                 theBullet.transform.SetParent(bulletPool.transform);
 
-                if(tier4Increment == 12)
+                if (tier4Increment == 12)
                 {
                     tier4Increment = 0;
                 }
@@ -249,6 +266,7 @@ public class AIPilot : Pilot
                 }
             }
         }
+
         if (ship.GetComponent<Ship>().tier == 5)
         {
             if (fireTier5)

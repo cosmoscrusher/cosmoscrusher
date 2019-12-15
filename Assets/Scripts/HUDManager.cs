@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
-public class HUDManager : MonoBehaviour {
+public class HUDManager : MonoBehaviour
+{
     public Sprite fullHeart;
     public Sprite emptyHeart;
     private int previousHealth = 5;
@@ -27,8 +27,9 @@ public class HUDManager : MonoBehaviour {
     private int untilNext;
     private Transform trackerTransform;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         nextTierIndicator.enabled = true;
         nextTierIndicator.canvasRenderer.SetAlpha(0.0f);
         heartIndicator.enabled = true;
@@ -36,12 +37,12 @@ public class HUDManager : MonoBehaviour {
         currentTierIndicator.enabled = true;
         currentTierIndicator.canvasRenderer.SetAlpha(0.0f);
         trackerTransform = trackerHolder.GetComponent<Transform>();
-	}
+    }
 
-	// Update is called once per frame
-	void Update () {
-
-	}
+    // Update is called once per frame
+    void Update()
+    {
+    }
 
     public void setTillNextTier(int untilNext, int next)
     {
@@ -65,18 +66,21 @@ public class HUDManager : MonoBehaviour {
         indicator.CrossFadeAlpha(0.0f, 0.75f, false);
     }
 
-    public void checkHealth(int totalHealth) {
+    public void checkHealth(int totalHealth)
+    {
         int i = 0;
         while (i < totalHealth)
         {
             hearts[i].sprite = fullHeart;
             ++i;
         }
+
         while (i < 5)
         {
             hearts[i].sprite = emptyHeart;
             ++i;
         }
+
         if (totalHealth != previousHealth)
         {
             previousHealth = totalHealth;
@@ -96,6 +100,7 @@ public class HUDManager : MonoBehaviour {
         {
             tierImages[i].sprite = tierSprites[i];
         }
+
         int newPosition = tier - 1;
         tierImages[newPosition].sprite = playerShips[newPosition];
         fadeIndicator(currentTierIndicator);
@@ -109,12 +114,14 @@ public class HUDManager : MonoBehaviour {
 
     public void updateIndicator(float beta)
     {
-        Vector3 newColor = 1.5f * beta * new Vector3(farColor.r, farColor.g, farColor.b) + (1.0f - beta) * new Vector3(nearColor.r, nearColor.g, nearColor.b);
+        Vector3 newColor = 1.5f * beta * new Vector3(farColor.r, farColor.g, farColor.b) +
+                           (1.0f - beta) * new Vector3(nearColor.r, nearColor.g, nearColor.b);
         Color indicatorColor = new Color(newColor.x, newColor.y, newColor.z);
         indicator.color = indicatorColor;
     }
 
-    public void rotateTracker(Vector3 playerPosition, Vector3 enemyPosition, Vector3 normal, Vector3 right, Vector3 forward, Color color)
+    public void rotateTracker(Vector3 playerPosition, Vector3 enemyPosition, Vector3 normal, Vector3 right,
+        Vector3 forward, Color color)
     {
         Vector3 theProjection = projection(enemyPosition, normal);
         Vector3 firstVector = theProjection - enemyPosition;

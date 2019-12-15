@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class UserPilot : Pilot
 {
@@ -26,29 +24,37 @@ public class UserPilot : Pilot
         {
             if (Input.anyKey)
             {
-                Vector3 frontDirection = Vector3.Normalize(currentTransform.transform.up) * speed * Time.deltaTime;//(currentTransform.position - frontTransform.position).normalized * speed;
-                Vector3 leftDirection = Vector3.Normalize(-currentTransform.transform.right) * speed * Time.deltaTime;//(currentTransform.position - leftTransform.position).normalized * speed;
+                Vector3 frontDirection =
+                    Vector3.Normalize(currentTransform.transform.up) * speed *
+                    Time.deltaTime; //(currentTransform.position - frontTransform.position).normalized * speed;
+                Vector3 leftDirection =
+                    Vector3.Normalize(-currentTransform.transform.right) * speed *
+                    Time.deltaTime; //(currentTransform.position - leftTransform.position).normalized * speed;
 
                 if (Input.GetKey(KeyCode.W))
                 {
                     currentTransform.RotateAround(Vector3.zero, leftDirection, -speed * Time.deltaTime);
                     //currentTransform.position += frontDirection;
                 }
+
                 if (Input.GetKey(KeyCode.A))
                 {
                     currentTransform.RotateAround(Vector3.zero, frontDirection, speed * Time.deltaTime);
                     //currentTransform.position += leftDirection;
                 }
+
                 if (Input.GetKey(KeyCode.S))
                 {
                     currentTransform.RotateAround(Vector3.zero, leftDirection, speed * Time.deltaTime);
                     //currentTransform.position += -frontDirection;
                 }
+
                 if (Input.GetKey(KeyCode.D))
                 {
                     currentTransform.RotateAround(Vector3.zero, frontDirection, -speed * Time.deltaTime);
                     //currentTransform.position += -leftDirection;
                 }
+
                 if (ship.GetComponent<Ship>().tier == 5)
                 {
                     if (Input.GetMouseButtonDown(1))
@@ -73,6 +79,7 @@ public class UserPilot : Pilot
                     }
                 }
             }
+
             Vector3 mouse = Input.mousePosition;
             Camera cam = camera.GetComponent<Camera>();
             mouse.x -= cam.pixelWidth / 2;
@@ -83,6 +90,7 @@ public class UserPilot : Pilot
             {
                 angle = -angle;
             }
+
             currentTransform.GetChild(0).rotation = currentTransform.rotation;
             currentTransform.GetChild(0).RotateAround(currentTransform.position, -currentTransform.forward, angle);
         }
@@ -96,6 +104,7 @@ public class UserPilot : Pilot
                     currentTransform.Translate(Vector3.up * speed * Time.deltaTime);
                 }
             }
+
             if (Input.GetKey(KeyCode.A))
             {
                 if (currentTransform.position.x > -105.0f)
@@ -103,6 +112,7 @@ public class UserPilot : Pilot
                     currentTransform.Translate(Vector3.left * speed * Time.deltaTime);
                 }
             }
+
             if (Input.GetKey(KeyCode.S))
             {
                 if (currentTransform.position.y > -55.0f)
@@ -110,6 +120,7 @@ public class UserPilot : Pilot
                     currentTransform.Translate(Vector3.down * speed * Time.deltaTime);
                 }
             }
+
             if (Input.GetKey(KeyCode.D))
             {
                 if (currentTransform.position.x < 105.0f)
@@ -117,6 +128,7 @@ public class UserPilot : Pilot
                     currentTransform.Translate(Vector3.right * speed * Time.deltaTime);
                 }
             }
+
             if (ship.GetComponent<Ship>().tier == 5)
             {
                 if (Input.GetMouseButtonDown(1))
@@ -152,10 +164,13 @@ public class UserPilot : Pilot
             {
                 angle = -angle;
             }
+
             currentTransform.GetChild(0).rotation = currentTransform.rotation;
-            currentTransform.GetChild(0).RotateAround(currentTransform.transform.position, -currentTransform.transform.forward, angle);
+            currentTransform.GetChild(0).RotateAround(currentTransform.transform.position,
+                -currentTransform.transform.forward, angle);
         }
     }
+
     private Bullet GetNonActiveBullet(GameObject bulletPool)
     {
         for (int i = 0; i < bulletPool.transform.childCount; ++i)
@@ -167,15 +182,16 @@ public class UserPilot : Pilot
                 return bill;
             }
         }
+
         Debug.LogError("NOT Enough Bullets");
         return null;
     }
+
     public void Fire(GameObject ship, GameObject bullet, GameObject bulletPool)
     {
         soundManager.PlayBulletFire();
         if (ship.GetComponent<Ship>().tier == 1)
         {
-
             Bullet theBullet = GetNonActiveBullet(bulletPool);
             theBullet.tier = ship.GetComponent<Ship>().tier;
             theBullet.isEnemy = false;
@@ -196,6 +212,7 @@ public class UserPilot : Pilot
             {
                 angle = -angle;
             }
+
             theBullet.gameObject.SetActive(true);
             theBullet.startLife();
             theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
@@ -232,6 +249,7 @@ public class UserPilot : Pilot
                     {
                         angle = -angle;
                     }
+
                     if (mouse.x < 0)
                     {
                         if (x > 0)
@@ -290,6 +308,7 @@ public class UserPilot : Pilot
                 {
                     angle = -angle;
                 }
+
                 theBullet.gameObject.SetActive(true);
                 theBullet.startLife();
                 theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
@@ -339,6 +358,7 @@ public class UserPilot : Pilot
                     {
                         theBullet.gameObject.layer = 18;
                     }
+
                     mouse.z = ship.transform.position.z - camera.transform.position.z;
                     mouse = cam.ScreenToWorldPoint(mouse);
                     Vector3 angleLine = Vector3.Normalize(mouse - ship.transform.position);
@@ -348,8 +368,8 @@ public class UserPilot : Pilot
                     {
                         angle = -angle;
                     }
-                    //angle += 180;
 
+                    //angle += 180;
                 }
 
                 if (x == 0)

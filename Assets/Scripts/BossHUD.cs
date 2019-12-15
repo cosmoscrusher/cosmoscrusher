@@ -1,9 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+
+using UnityEngine;
 using UnityEngine.UI;
 
-public class BossHUD : MonoBehaviour {
-
+public class BossHUD : MonoBehaviour
+{
     public GameObject enemyHud;
     public Sprite red;
     public Sprite blue;
@@ -19,6 +20,7 @@ public class BossHUD : MonoBehaviour {
     public GameObject leftEnd;
 
     public Sprite emptyHeart;
+
     //public Sprite fourthHeart;
     //public Sprite halfHeart;
     //public Sprite threeFourthHeart;
@@ -44,22 +46,24 @@ public class BossHUD : MonoBehaviour {
     private Vector2 rightEndPosition;
 
     // Use this for initialization
-	void Start () {
+    void Start()
+    {
         seperatorTransform = bossHealthSeperator.GetComponent<RectTransform>();
         leftEndPosition = leftEnd.GetComponent<RectTransform>().position;
         rightEndPosition = seperatorTransform.position;
         StartCoroutine(startFading());
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         greenColorIndicator.enabled = true;
         greenColorIndicator.canvasRenderer.SetAlpha(0.0f);
         blueColorIndicator.enabled = true;
         blueColorIndicator.canvasRenderer.SetAlpha(0.0f);
         heartIndicator.enabled = true;
         heartIndicator.canvasRenderer.SetAlpha(0.0f);
-	}
+    }
 
     public void setBossStats(int maxHealth, int maxShield)
     {
@@ -84,7 +88,7 @@ public class BossHUD : MonoBehaviour {
             }
             else
             {
-                float shieldLeft = (float)currentEnemyShield / (float)enemyMaxShield;
+                float shieldLeft = (float) currentEnemyShield / (float) enemyMaxShield;
                 bossHealthFront.fillAmount = shieldLeft;
                 Vector2 lerpedPosition = Vector2.Lerp(leftEndPosition, rightEndPosition, shieldLeft);
                 seperatorTransform.position = lerpedPosition;
@@ -100,11 +104,11 @@ public class BossHUD : MonoBehaviour {
             }
             else
             {
-                float healthLeft = (float)currentEnemyHealth / (float)enemyMaxHealth;
+                float healthLeft = (float) currentEnemyHealth / (float) enemyMaxHealth;
                 bossHealthFront.fillAmount = healthLeft;
                 Vector2 lerpedPosition = Vector2.Lerp(leftEndPosition, rightEndPosition, healthLeft);
                 seperatorTransform.position = lerpedPosition;
-            }            
+            }
         }
     }
 
@@ -131,6 +135,7 @@ public class BossHUD : MonoBehaviour {
             hearts[i].sprite = fullHeart;
             ++i;
         }
+
         while (i < 5)
         {
             hearts[i].sprite = emptyHeart;
@@ -147,6 +152,7 @@ public class BossHUD : MonoBehaviour {
         {
             hearts[i - 1].sprite = emptyHeart;
         }
+
         fadeIndicator(heartIndicator);
     }
 

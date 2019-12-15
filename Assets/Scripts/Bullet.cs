@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Bullet : MonoBehaviour 
+public class Bullet : MonoBehaviour
 {
     public int tier;
     public bool isEnemy;
@@ -17,20 +16,21 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-
     }
-    
+
     void Update()
     {
         if (paused)
         {
             return;
         }
+
         life -= Time.deltaTime;
         if (life <= 0)
         {
             clearBullet();
         }
+
         if (!isBoss)
         {
             if (!isEnemy)
@@ -42,7 +42,6 @@ public class Bullet : MonoBehaviour
 
             else
             {
-
                 Transform currentTransform = gameObject.transform;
                 Vector3 leftDirection = Vector3.Normalize(-currentTransform.transform.right) * 15 * Time.deltaTime;
                 currentTransform.RotateAround(Vector3.zero, leftDirection, -15 * Time.deltaTime);
@@ -56,10 +55,12 @@ public class Bullet : MonoBehaviour
             {
                 speed = 30;
             }
-            if(isFlood)
+
+            if (isFlood)
             {
                 speed = 20;
             }
+
             Transform currentTransform = gameObject.transform;
             currentTransform.Translate(Vector3.up * speed * Time.deltaTime);
         }
@@ -121,6 +122,7 @@ public class Bullet : MonoBehaviour
                 }
             }
         }
+
         if (collision.gameObject.layer == 16 || collision.gameObject.layer == 19 || collision.gameObject.layer == 20)
         {
             Boss theBoss = collision.gameObject.GetComponent<Boss>();
@@ -142,7 +144,7 @@ public class Bullet : MonoBehaviour
     public void startLife()
     {
         life = 0;
-        if(!isEnemy)
+        if (!isEnemy)
         {
             life = 0.65f;
             if (tier == 5)
