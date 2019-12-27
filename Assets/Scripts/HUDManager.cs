@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets._scripts
+namespace Assets.Scripts
 {
     public class HUDManager : MonoBehaviour
     {

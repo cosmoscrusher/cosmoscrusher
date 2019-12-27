@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 
-using Assets._scripts.Pilots;
+using Assets.Scripts.Pilots;
 
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets._scripts
+namespace Assets.Scripts
 {
     public class HowTo : MonoBehaviour
     {

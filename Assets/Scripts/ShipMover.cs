@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets._scripts
+namespace Assets.Scripts
 {
     public class ShipMover : MonoBehaviour
     {

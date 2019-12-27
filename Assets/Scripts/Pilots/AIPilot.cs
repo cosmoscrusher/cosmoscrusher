@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets._scripts.Pilots
+namespace Assets.Scripts.Pilots
 {
     public class AIPilot : IPilot
     {

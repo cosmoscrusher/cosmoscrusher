@@ -3,7 +3,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Assets._scripts
+namespace Assets.Scripts
 {
     public class LevelLoader : MonoBehaviour
     {

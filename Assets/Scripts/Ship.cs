@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 
-using Assets._scripts.Pilots;
+using Assets.Scripts.Pilots;
 
 using UnityEngine;
 
-namespace Assets._scripts
+namespace Assets.Scripts
 {
     public class Ship : MonoBehaviour
     {
