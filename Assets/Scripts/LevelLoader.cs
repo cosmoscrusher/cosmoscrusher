@@ -10,7 +10,8 @@ namespace Assets._scripts
         [UsedImplicitly]
         public void LevelLoad(string levelName)
         {
-            SceneManager.LoadSceneAsync(levelName);
+            SceneManager.LoadScene(levelName);
+            //SceneManager.LoadSceneAsync(levelName);
         }
 
         [UsedImplicitly]
