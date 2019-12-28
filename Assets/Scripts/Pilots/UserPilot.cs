@@ -21,156 +21,156 @@ namespace Assets.Scripts.Pilots
 
         public void MoveShip(GameObject ship)
         {
-            Transform currentTransform = ship.transform;
-            if (!theBossFight)
-            {
-                if (Input.anyKey)
-                {
-                    Vector3 frontDirection =
-                        Vector3.Normalize(currentTransform.transform.up) * speed *
-                        Time.deltaTime; //(currentTransform.position - frontTransform.position).normalized * speed;
-                    Vector3 leftDirection =
-                        Vector3.Normalize(-currentTransform.transform.right) * speed *
-                        Time.deltaTime; //(currentTransform.position - leftTransform.position).normalized * speed;
+            //Transform currentTransform = ship.transform;
+            //if (!theBossFight)
+            //{
+            //    if (Input.anyKey)
+            //    {
+            //        Vector3 frontDirection =
+            //            Vector3.Normalize(currentTransform.transform.up) * speed *
+            //            Time.deltaTime; //(currentTransform.position - frontTransform.position).normalized * speed;
+            //        Vector3 leftDirection =
+            //            Vector3.Normalize(-currentTransform.transform.right) * speed *
+            //            Time.deltaTime; //(currentTransform.position - leftTransform.position).normalized * speed;
 
-                    if (Input.GetKey(KeyCode.W))
-                    {
-                        currentTransform.RotateAround(Vector3.zero, leftDirection, -speed * Time.deltaTime);
-                        //currentTransform.position += frontDirection;
-                    }
+            //        if (Input.GetKey(KeyCode.W))
+            //        {
+            //            currentTransform.RotateAround(Vector3.zero, leftDirection, -speed * Time.deltaTime);
+            //            //currentTransform.position += frontDirection;
+            //        }
 
-                    if (Input.GetKey(KeyCode.A))
-                    {
-                        currentTransform.RotateAround(Vector3.zero, frontDirection, speed * Time.deltaTime);
-                        //currentTransform.position += leftDirection;
-                    }
+            //        if (Input.GetKey(KeyCode.A))
+            //        {
+            //            currentTransform.RotateAround(Vector3.zero, frontDirection, speed * Time.deltaTime);
+            //            //currentTransform.position += leftDirection;
+            //        }
 
-                    if (Input.GetKey(KeyCode.S))
-                    {
-                        currentTransform.RotateAround(Vector3.zero, leftDirection, speed * Time.deltaTime);
-                        //currentTransform.position += -frontDirection;
-                    }
+            //        if (Input.GetKey(KeyCode.S))
+            //        {
+            //            currentTransform.RotateAround(Vector3.zero, leftDirection, speed * Time.deltaTime);
+            //            //currentTransform.position += -frontDirection;
+            //        }
 
-                    if (Input.GetKey(KeyCode.D))
-                    {
-                        currentTransform.RotateAround(Vector3.zero, frontDirection, -speed * Time.deltaTime);
-                        //currentTransform.position += -leftDirection;
-                    }
+            //        if (Input.GetKey(KeyCode.D))
+            //        {
+            //            currentTransform.RotateAround(Vector3.zero, frontDirection, -speed * Time.deltaTime);
+            //            //currentTransform.position += -leftDirection;
+            //        }
 
-                    if (ship.GetComponent<Ship>().tier == 5)
-                    {
-                        if (Input.GetMouseButtonDown(1))
-                        {
-                            Ship playerShip = ship.GetComponent<Ship>();
-                            Material second = playerShip.material;
-                            Material secondHit = playerShip.hitMaterial;
-                            bulletMaterial = playerShip.secondaryMaterial;
-                            playerShip.material = playerShip.secondaryMaterial;
-                            playerShip.hitMaterial = playerShip.secondaryHitMaterial;
-                            playerShip.secondaryMaterial = second;
-                            playerShip.secondaryHitMaterial = secondHit;
-                            ship.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = playerShip.material;
-                            if (playerShip.gameObject.layer == 13)
-                            {
-                                playerShip.gameObject.layer = 12;
-                            }
-                            else
-                            {
-                                playerShip.gameObject.layer = 13;
-                            }
-                        }
-                    }
-                }
+            //        if (ship.GetComponent<Ship>().tier == 5)
+            //        {
+            //            if (Input.GetMouseButtonDown(1))
+            //            {
+            //                Ship playerShip = ship.GetComponent<Ship>();
+            //                Material second = playerShip.material;
+            //                Material secondHit = playerShip.hitMaterial;
+            //                bulletMaterial = playerShip.secondaryMaterial;
+            //                playerShip.material = playerShip.secondaryMaterial;
+            //                playerShip.hitMaterial = playerShip.secondaryHitMaterial;
+            //                playerShip.secondaryMaterial = second;
+            //                playerShip.secondaryHitMaterial = secondHit;
+            //                ship.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = playerShip.material;
+            //                if (playerShip.gameObject.layer == 13)
+            //                {
+            //                    playerShip.gameObject.layer = 12;
+            //                }
+            //                else
+            //                {
+            //                    playerShip.gameObject.layer = 13;
+            //                }
+            //            }
+            //        }
+            //    }
 
-                Vector3 mouse = Input.mousePosition;
-                Camera cam = camera.GetComponent<Camera>();
-                mouse.x -= cam.pixelWidth / 2;
-                mouse.y -= cam.pixelHeight / 2;
-                mouse = Vector3.Normalize(mouse);
-                float angle = Vector3.Angle(Vector3.up, mouse);
-                if (mouse.x < 0)
-                {
-                    angle = -angle;
-                }
+            //    Vector3 mouse = Input.mousePosition;
+            //    Camera cam = camera.GetComponent<Camera>();
+            //    mouse.x -= cam.pixelWidth / 2;
+            //    mouse.y -= cam.pixelHeight / 2;
+            //    mouse = Vector3.Normalize(mouse);
+            //    float angle = Vector3.Angle(Vector3.up, mouse);
+            //    if (mouse.x < 0)
+            //    {
+            //        angle = -angle;
+            //    }
 
-                currentTransform.GetChild(0).rotation = currentTransform.rotation;
-                currentTransform.GetChild(0).RotateAround(currentTransform.position, -currentTransform.forward, angle);
-            }
+            //    currentTransform.GetChild(0).rotation = currentTransform.rotation;
+            //    currentTransform.GetChild(0).RotateAround(currentTransform.position, -currentTransform.forward, angle);
+            //}
 
-            else
-            {
-                if (Input.GetKey(KeyCode.W))
-                {
-                    if (currentTransform.position.y < 55.0f)
-                    {
-                        currentTransform.Translate(Vector3.up * speed * Time.deltaTime);
-                    }
-                }
+            //else
+            //{
+            //    if (Input.GetKey(KeyCode.W))
+            //    {
+            //        if (currentTransform.position.y < 55.0f)
+            //        {
+            //            currentTransform.Translate(Vector3.up * speed * Time.deltaTime);
+            //        }
+            //    }
 
-                if (Input.GetKey(KeyCode.A))
-                {
-                    if (currentTransform.position.x > -105.0f)
-                    {
-                        currentTransform.Translate(Vector3.left * speed * Time.deltaTime);
-                    }
-                }
+            //    if (Input.GetKey(KeyCode.A))
+            //    {
+            //        if (currentTransform.position.x > -105.0f)
+            //        {
+            //            currentTransform.Translate(Vector3.left * speed * Time.deltaTime);
+            //        }
+            //    }
 
-                if (Input.GetKey(KeyCode.S))
-                {
-                    if (currentTransform.position.y > -55.0f)
-                    {
-                        currentTransform.Translate(Vector3.down * speed * Time.deltaTime);
-                    }
-                }
+            //    if (Input.GetKey(KeyCode.S))
+            //    {
+            //        if (currentTransform.position.y > -55.0f)
+            //        {
+            //            currentTransform.Translate(Vector3.down * speed * Time.deltaTime);
+            //        }
+            //    }
 
-                if (Input.GetKey(KeyCode.D))
-                {
-                    if (currentTransform.position.x < 105.0f)
-                    {
-                        currentTransform.Translate(Vector3.right * speed * Time.deltaTime);
-                    }
-                }
+            //    if (Input.GetKey(KeyCode.D))
+            //    {
+            //        if (currentTransform.position.x < 105.0f)
+            //        {
+            //            currentTransform.Translate(Vector3.right * speed * Time.deltaTime);
+            //        }
+            //    }
 
-                if (ship.GetComponent<Ship>().tier == 5)
-                {
-                    if (Input.GetMouseButtonDown(1))
-                    {
-                        Ship playerShip = ship.GetComponent<Ship>();
-                        Material second = playerShip.material;
-                        Material secondHit = playerShip.hitMaterial;
-                        bulletMaterial = playerShip.secondaryMaterial;
-                        playerShip.material = playerShip.secondaryMaterial;
-                        playerShip.hitMaterial = playerShip.secondaryHitMaterial;
-                        playerShip.secondaryMaterial = second;
-                        playerShip.secondaryHitMaterial = secondHit;
-                        ship.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = playerShip.material;
-                        playerShip.bossHud.flipColor();
-                        if (playerShip.gameObject.layer == 13)
-                        {
-                            playerShip.gameObject.layer = 12;
-                        }
-                        else
-                        {
-                            playerShip.gameObject.layer = 13;
-                        }
-                    }
-                }
+            //    if (ship.GetComponent<Ship>().tier == 5)
+            //    {
+            //        if (Input.GetMouseButtonDown(1))
+            //        {
+            //            Ship playerShip = ship.GetComponent<Ship>();
+            //            Material second = playerShip.material;
+            //            Material secondHit = playerShip.hitMaterial;
+            //            bulletMaterial = playerShip.secondaryMaterial;
+            //            playerShip.material = playerShip.secondaryMaterial;
+            //            playerShip.hitMaterial = playerShip.secondaryHitMaterial;
+            //            playerShip.secondaryMaterial = second;
+            //            playerShip.secondaryHitMaterial = secondHit;
+            //            ship.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = playerShip.material;
+            //            playerShip.bossHud.flipColor();
+            //            if (playerShip.gameObject.layer == 13)
+            //            {
+            //                playerShip.gameObject.layer = 12;
+            //            }
+            //            else
+            //            {
+            //                playerShip.gameObject.layer = 13;
+            //            }
+            //        }
+            //    }
 
-                Vector3 mouse = Input.mousePosition;
-                Camera cam = camera.GetComponent<Camera>();
-                mouse.z = ship.transform.position.z - camera.transform.position.z;
-                mouse = cam.ScreenToWorldPoint(mouse);
-                Vector3 angleLine = Vector3.Normalize(mouse - ship.transform.position);
-                float angle = Vector3.Angle(Vector3.up, angleLine);
-                if (angleLine.x < 0)
-                {
-                    angle = -angle;
-                }
+            //    Vector3 mouse = Input.mousePosition;
+            //    Camera cam = camera.GetComponent<Camera>();
+            //    mouse.z = ship.transform.position.z - camera.transform.position.z;
+            //    mouse = cam.ScreenToWorldPoint(mouse);
+            //    Vector3 angleLine = Vector3.Normalize(mouse - ship.transform.position);
+            //    float angle = Vector3.Angle(Vector3.up, angleLine);
+            //    if (angleLine.x < 0)
+            //    {
+            //        angle = -angle;
+            //    }
 
-                currentTransform.GetChild(0).rotation = currentTransform.rotation;
-                currentTransform.GetChild(0).RotateAround(currentTransform.transform.position,
-                    -currentTransform.transform.forward, angle);
-            }
+            //    currentTransform.GetChild(0).rotation = currentTransform.rotation;
+            //    currentTransform.GetChild(0).RotateAround(currentTransform.transform.position,
+            //        -currentTransform.transform.forward, angle);
+            //}
         }
 
         private Bullet GetNonActiveBullet(GameObject bulletPool)

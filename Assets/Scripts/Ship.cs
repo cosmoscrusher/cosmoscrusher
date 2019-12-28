@@ -37,7 +37,7 @@ namespace Assets.Scripts
                     return;
                 }
 
-                pilot.MoveShip(gameObject);
+                //pilot.MoveShip(gameObject);
 
                 if (pilot is UserPilot && Input.GetMouseButton(0))
                 {
@@ -110,7 +110,13 @@ namespace Assets.Scripts
                     if (collision.gameObject.GetComponent<Ship>().tier == tier + 1)
                     {
                         collidedShip = collision.gameObject;
-                        collidedShip.GetComponent<AiPilotMovement>().enabled = false;
+                        Destroy(collidedShip.GetComponent<AiPilotMovement>());
+
+                        var currentMovement = GetComponent<UserMovement>();
+
+                        var movement = collidedShip.AddComponent<UserMovement>();
+                        movement.speed = currentMovement.speed;
+                        movement.camera = currentMovement.camera;
 
                         if (hud != null)
                         {

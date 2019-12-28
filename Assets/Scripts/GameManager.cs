@@ -106,6 +106,12 @@ namespace Assets.Scripts
             ship.hud = hud;
             ship.material = playerMaterial;
             ship.hitMaterial = playerHitMaterial;
+
+            Destroy(ship.GetComponent<AiPilotMovement>());
+            var movement = ship.gameObject.AddComponent<UserMovement>();
+            movement.speed = speed;
+            movement.camera = cam;
+
             return ship;
         }
 

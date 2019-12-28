@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 
+using Assets.Scripts.New;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -955,6 +956,12 @@ namespace Assets.Scripts
             ship.GetComponent<Ship>().bulletPool = bulletPool;
             ship.secondaryMaterial = secondaryMaterial;
             ship.secondaryHitMaterial = secondaryHitMaterial;
+
+            Destroy(ship.GetComponent<AiPilotMovement>());
+            var movement = ship.gameObject.AddComponent<UserBossMovement>();
+            movement.speed = 30;
+            movement.camera = cam;
+
             playerShip = ship;
         }
 
