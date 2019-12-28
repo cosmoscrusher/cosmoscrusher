@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+
+using UnityEngine;
 
 namespace Assets.Scripts.New
 {
@@ -10,29 +12,22 @@ namespace Assets.Scripts.New
         private float secondsPassed;
         private int randomDirection;
 
-        void Start()
-        {
-        }
-
-        void LateUpdate()
-        {
-        }
-
+        [UsedImplicitly]
         void Update()
         {
-            //if (!gameOver)
-            //{
-            //    if (paused)
-            //    {
-            //        return;
-            //    }
+            //TODO: Find a better way to handle this.  Maybe disabling components?
+            var gameOver = GetComponent<Ship>().gameOver;
+            var paused = GetComponent<Ship>().paused;
+
+            if (gameOver || paused)
+            {
+                return;
+            }
 
             MoveShip();
-            //}
         }
 
-
-        public void MoveShip()
+        private void MoveShip()
         {
             var theTransform = gameObject.transform;
             if (secondsPassed >= secondsToChange)
