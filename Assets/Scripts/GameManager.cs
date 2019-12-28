@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
+using Assets.Scripts.New;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -143,6 +144,10 @@ namespace Assets.Scripts
             }
 
             ship.pilot = new AIPilot(speed * .675f, ship.material);
+            
+            var movement = ship.GetComponent<AiPilotMovement>();
+            movement.speed = speed * .675f;
+            
             ship.hitMaterial = enemyHitMaterial;
             return ship;
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 
+using Assets.Scripts.New;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -109,6 +110,8 @@ namespace Assets.Scripts
                     if (collision.gameObject.GetComponent<Ship>().tier == tier + 1)
                     {
                         collidedShip = collision.gameObject;
+                        collidedShip.GetComponent<AiPilotMovement>().enabled = false;
+
                         if (hud != null)
                         {
                             hud.enemyDestroyed();
