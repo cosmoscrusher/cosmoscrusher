@@ -9,10 +9,8 @@ namespace Assets.Scripts.New
         public float speed;
         public GameObject camera;
 
-        private Material bulletMaterial;
-
         [UsedImplicitly]
-        void Update()
+        public void Update()
         {
             //TODO: Find a better way to handle this.  Maybe disabling components?
             var gameOver = GetComponent<Ship>().gameOver;
@@ -69,7 +67,6 @@ namespace Assets.Scripts.New
                         Ship playerShip = GetComponent<Ship>();
                         Material second = playerShip.material;
                         Material secondHit = playerShip.hitMaterial;
-                        bulletMaterial = playerShip.secondaryMaterial;
                         playerShip.material = playerShip.secondaryMaterial;
                         playerShip.hitMaterial = playerShip.secondaryHitMaterial;
                         playerShip.secondaryMaterial = second;

@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using Assets.Scripts.Pilots;
+
+using JetBrains.Annotations;
 
 using UnityEngine;
 
@@ -8,8 +10,6 @@ namespace Assets.Scripts.New
     {
         public float speed;
         public GameObject camera;
-
-        private Material bulletMaterial;
 
         [UsedImplicitly]
         void Update()
@@ -68,7 +68,10 @@ namespace Assets.Scripts.New
                     var playerShip = GetComponent<Ship>();
                     var second = playerShip.material;
                     var secondHit = playerShip.hitMaterial;
-                    bulletMaterial = playerShip.secondaryMaterial;
+
+                    var pilot = playerShip.pilot as UserPilot;
+                    pilot.bulletMaterial = playerShip.secondaryMaterial;
+                    
                     playerShip.material = playerShip.secondaryMaterial;
                     playerShip.hitMaterial = playerShip.secondaryHitMaterial;
                     playerShip.secondaryMaterial = second;

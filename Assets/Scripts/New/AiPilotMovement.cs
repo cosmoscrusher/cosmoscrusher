@@ -13,7 +13,7 @@ namespace Assets.Scripts.New
         private int randomDirection;
 
         [UsedImplicitly]
-        void Update()
+        public void Update()
         {
             //TODO: Find a better way to handle this.  Maybe disabling components?
             var gameOver = GetComponent<Ship>().gameOver;

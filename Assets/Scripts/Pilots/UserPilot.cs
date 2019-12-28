@@ -7,7 +7,7 @@ namespace Assets.Scripts.Pilots
         private SoundManager soundManager;
         private GameObject camera;
         private float speed;
-        private Material bulletMaterial;
+        public Material bulletMaterial;
         private bool theBossFight;
 
         public UserPilot(float speed, GameObject camera, Material bulletMat, bool theBossFight, SoundManager soundManager)
