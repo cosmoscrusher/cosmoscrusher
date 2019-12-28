@@ -958,9 +958,12 @@ namespace Assets.Scripts
             ship.secondaryHitMaterial = secondaryHitMaterial;
 
             Destroy(ship.GetComponent<AiPilotMovement>());
+            
             var movement = ship.gameObject.AddComponent<UserBossMovement>();
             movement.speed = 30;
             movement.camera = cam;
+
+            ship.gameObject.AddComponent<UserPowerSwitch>();
 
             playerShip = ship;
         }

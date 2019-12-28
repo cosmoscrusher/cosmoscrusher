@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Pilots;
-
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 using UnityEngine;
 
@@ -58,34 +56,6 @@ namespace Assets.Scripts.New
                 if (currentTransform.position.x < 105.0f)
                 {
                     currentTransform.Translate(Vector3.right * speed * Time.deltaTime);
-                }
-            }
-
-            if (GetComponent<Ship>().tier == 5)
-            {
-                if (Input.GetMouseButtonDown(1))
-                {
-                    var playerShip = GetComponent<Ship>();
-                    var second = playerShip.material;
-                    var secondHit = playerShip.hitMaterial;
-
-                    var pilot = playerShip.pilot as UserPilot;
-                    pilot.bulletMaterial = playerShip.secondaryMaterial;
-                    
-                    playerShip.material = playerShip.secondaryMaterial;
-                    playerShip.hitMaterial = playerShip.secondaryHitMaterial;
-                    playerShip.secondaryMaterial = second;
-                    playerShip.secondaryHitMaterial = secondHit;
-                    transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = playerShip.material;
-                    playerShip.bossHud.flipColor();
-                    if (playerShip.gameObject.layer == 13)
-                    {
-                        playerShip.gameObject.layer = 12;
-                    }
-                    else
-                    {
-                        playerShip.gameObject.layer = 13;
-                    }
                 }
             }
 

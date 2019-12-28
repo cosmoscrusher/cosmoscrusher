@@ -26,15 +26,13 @@ namespace Assets.Scripts.New
 
         public void MoveShip()
         {
-            Transform currentTransform = transform;
+            var currentTransform = transform;
             if (Input.anyKey)
             {
-                Vector3 frontDirection =
-                    Vector3.Normalize(currentTransform.transform.up) * speed *
-                    Time.deltaTime; //(currentTransform.position - frontTransform.position).normalized * speed;
-                Vector3 leftDirection =
-                    Vector3.Normalize(-currentTransform.transform.right) * speed *
-                    Time.deltaTime; //(currentTransform.position - leftTransform.position).normalized * speed;
+                Vector3 frontDirection = Vector3.Normalize(currentTransform.transform.up) * speed * Time.deltaTime;
+                //(currentTransform.position - frontTransform.position).normalized * speed;
+                Vector3 leftDirection = Vector3.Normalize(-currentTransform.transform.right) * speed * Time.deltaTime;
+                //(currentTransform.position - leftTransform.position).normalized * speed;
 
                 if (Input.GetKey(KeyCode.W))
                 {
@@ -59,37 +57,14 @@ namespace Assets.Scripts.New
                     currentTransform.RotateAround(Vector3.zero, frontDirection, -speed * Time.deltaTime);
                     //currentTransform.position += -leftDirection;
                 }
-
-                if (GetComponent<Ship>().tier == 5)
-                {
-                    if (Input.GetMouseButtonDown(1))
-                    {
-                        Ship playerShip = GetComponent<Ship>();
-                        Material second = playerShip.material;
-                        Material secondHit = playerShip.hitMaterial;
-                        playerShip.material = playerShip.secondaryMaterial;
-                        playerShip.hitMaterial = playerShip.secondaryHitMaterial;
-                        playerShip.secondaryMaterial = second;
-                        playerShip.secondaryHitMaterial = secondHit;
-                        transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = playerShip.material;
-                        if (playerShip.gameObject.layer == 13)
-                        {
-                            playerShip.gameObject.layer = 12;
-                        }
-                        else
-                        {
-                            playerShip.gameObject.layer = 13;
-                        }
-                    }
-                }
             }
 
-            Vector3 mouse = Input.mousePosition;
-            Camera cam = camera.GetComponent<Camera>();
+            var mouse = Input.mousePosition;
+            var cam = camera.GetComponent<Camera>();
             mouse.x -= cam.pixelWidth / 2;
             mouse.y -= cam.pixelHeight / 2;
             mouse = Vector3.Normalize(mouse);
-            float angle = Vector3.Angle(Vector3.up, mouse);
+            var angle = Vector3.Angle(Vector3.up, mouse);
             if (mouse.x < 0)
             {
                 angle = -angle;

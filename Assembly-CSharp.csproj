@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\New\AiPilotMovement.cs" />
      <Compile Include="Assets\Scripts\New\UserBossMovement.cs" />
      <Compile Include="Assets\Scripts\New\UserPlanetMovement.cs" />
+     <Compile Include="Assets\Scripts\New\UserPowerSwitch.cs" />
      <Compile Include="Assets\Scripts\ParticleKiller.cs" />
      <Compile Include="Assets\Scripts\Pilots\AIPilot.cs" />
      <Compile Include="Assets\Scripts\Pilots\HowToPilot.cs" />
