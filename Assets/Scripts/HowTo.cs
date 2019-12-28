@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 
+using Assets.Scripts.New;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -39,6 +40,13 @@ namespace Assets.Scripts
             playerShip.fireBullets = false;
             playerShip.bulletPool = bulletPool;
             playerShip.tier = 1;
+
+            Destroy(playerShip.GetComponent<AiPilotMovement>());
+
+            var movement = playerShip.gameObject.AddComponent<UserMovement>();
+            movement.speed = speed;
+            movement.camera = cam;
+
             enemyShipOne.pilot = new HowToPilot();
             enemyShipOne.material = purpleMaterial;
             enemyShipOne.hitMaterial = enemyHitMaterial;
