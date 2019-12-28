@@ -108,7 +108,7 @@ namespace Assets.Scripts
             ship.hitMaterial = playerHitMaterial;
 
             Destroy(ship.GetComponent<AiPilotMovement>());
-            var movement = ship.gameObject.AddComponent<UserMovement>();
+            var movement = ship.gameObject.AddComponent<UserPlanetMovement>();
             movement.speed = speed;
             movement.camera = cam;
 

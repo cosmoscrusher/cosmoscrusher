@@ -37,8 +37,6 @@ namespace Assets.Scripts
                     return;
                 }
 
-                //pilot.MoveShip(gameObject);
-
                 if (pilot is UserPilot && Input.GetMouseButton(0))
                 {
                     if (fireBullets)
@@ -112,9 +110,9 @@ namespace Assets.Scripts
                         collidedShip = collision.gameObject;
                         Destroy(collidedShip.GetComponent<AiPilotMovement>());
 
-                        var currentMovement = GetComponent<UserMovement>();
+                        var currentMovement = GetComponent<UserPlanetMovement>();
 
-                        var movement = collidedShip.AddComponent<UserMovement>();
+                        var movement = collidedShip.AddComponent<UserPlanetMovement>();
                         movement.speed = currentMovement.speed;
                         movement.camera = currentMovement.camera;
 

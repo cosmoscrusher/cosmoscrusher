@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.New
 {
-    public class UserMovement : MonoBehaviour
+    public class UserPlanetMovement : MonoBehaviour
     {
         public float speed;
         public GameObject camera;

@@ -43,7 +43,7 @@ namespace Assets.Scripts
 
             Destroy(playerShip.GetComponent<AiPilotMovement>());
 
-            var movement = playerShip.gameObject.AddComponent<UserMovement>();
+            var movement = playerShip.gameObject.AddComponent<UserPlanetMovement>();
             movement.speed = speed;
             movement.camera = cam;
 
