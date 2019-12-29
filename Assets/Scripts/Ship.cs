@@ -110,7 +110,11 @@ namespace Assets.Scripts
                     {
                         collidedShip = collision.gameObject;
                         Destroy(collidedShip.GetComponent<AiPilotMovement>());
-                        Destroy(collidedShip.GetComponent<AiPilotFiring>());
+                        var aiComponents = collidedShip.GetComponents<AiPilotFiring>();
+                        foreach (var aiComponent in aiComponents)
+                        {
+                            Destroy(aiComponent);
+                        }
 
                         var currentMovement = GetComponent<UserPlanetMovement>();
 
