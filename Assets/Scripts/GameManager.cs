@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 
 using Assets.Scripts.New;
+using Assets.Scripts.New.PilotFiring.Tier1PilotFiring;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
@@ -154,6 +156,12 @@ namespace Assets.Scripts
             var movement = ship.gameObject.AddComponent<AiPilotMovement>();
             movement.speed = speed * .675f;
             movement.secondsToChange = 2;
+
+            if (tier == 1)
+            {
+                var firingComponent = ship.gameObject.AddComponent<AiTier1PilotFiring>();
+                firingComponent.bulletPool = bulletPool;
+            }
             
             ship.hitMaterial = enemyHitMaterial;
             return ship;
@@ -364,7 +372,7 @@ namespace Assets.Scripts
                 playerShip.transform.RotateAround(Vector3.zero, leftDirection, -speed * Time.deltaTime);
                 if (timePassed >= secondsToPortal)
                 {
-                    Application.LoadLevel("BossScene");
+                    SceneManager.LoadScene("BossScene");
                 }
             }
         }

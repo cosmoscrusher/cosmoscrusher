@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\MenuManager.cs" />
      <Compile Include="Assets\Scripts\New\AiPilotMovement.cs" />
+     <Compile Include="Assets\Scripts\New\PilotFiring\Tier1PilotFiring\AiTier1PilotFiring.cs" />
      <Compile Include="Assets\Scripts\New\UserBossMovement.cs" />
      <Compile Include="Assets\Scripts\New\UserPlanetMovement.cs" />
      <Compile Include="Assets\Scripts\New\UserPowerSwitch.cs" />

@@ -4,6 +4,7 @@ using Assets.Scripts.New;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Scripts
@@ -137,7 +138,7 @@ namespace Assets.Scripts
 
             if (end)
             {
-                Application.LoadLevel("MainMenu");
+                SceneManager.LoadScene("MainMenu");
             }
         }
 
