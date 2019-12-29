@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.New.PilotFiring.Tier1PilotFiring
+namespace Assets.Scripts.New.PilotFiring.Tier4PilotFiring
 {
     //TODO: Better Name would help
-    public class AiTier1PilotFiring : AiPilotFiring
+    public class AiTier4PilotFiring : AiPilotFiring
     {
         public GameObject bulletPool;
 
         private bool firing;
         private float firingDelay;
+        private int tier4Increment;
 
         void Update()
         {
@@ -32,7 +33,7 @@ namespace Assets.Scripts.New.PilotFiring.Tier1PilotFiring
 
                 firingDelay = 0;
 
-                var theBullet = GetNonActiveBullet(bulletPool);
+                Bullet theBullet = GetNonActiveBullet(bulletPool);
                 theBullet.color = GetComponent<Ship>().color;
                 theBullet.gameObject.transform.GetComponent<Renderer>().material = shipMaterial;
                 theBullet.tier = GetComponent<Ship>().tier;
@@ -42,23 +43,29 @@ namespace Assets.Scripts.New.PilotFiring.Tier1PilotFiring
                 theBullet.transform.rotation = transform.rotation;
                 theBullet.transform.SetParent(bulletPool.transform);
 
+                if (tier4Increment == 12)
+                {
+                    tier4Increment = 0;
+                }
+
+                float angle = 30 * tier4Increment;
+
+                tier4Increment++;
+
                 theBullet.gameObject.SetActive(true);
                 theBullet.startLife();
                 theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = shipMaterial.color;
                 theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-
-                var angle = 0;
-                var bulletTransform = theBullet.transform;
+                Transform bulletTransform = theBullet.transform;
                 bulletTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angle);
 
                 firing = false;
             }
-
             else
             {
                 firingDelay += Time.deltaTime;
 
-                if (firingDelay >= 0.25)
+                if (firingDelay >= .1)
                 {
                     firing = true;
                 }

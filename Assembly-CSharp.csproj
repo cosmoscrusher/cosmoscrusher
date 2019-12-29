@@ -65,7 +65,12 @@
      <Compile Include="Assets\Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\MenuManager.cs" />
      <Compile Include="Assets\Scripts\New\AiPilotMovement.cs" />
+     <Compile Include="Assets\Scripts\New\PilotFiring\AiPilotFiring.cs" />
      <Compile Include="Assets\Scripts\New\PilotFiring\Tier1PilotFiring\AiTier1PilotFiring.cs" />
+     <Compile Include="Assets\Scripts\New\PilotFiring\Tier2PilotFiring\AiTier2PilotFiring.cs" />
+     <Compile Include="Assets\Scripts\New\PilotFiring\Tier3PilotFiring\AiTier3PilotFiring.cs" />
+     <Compile Include="Assets\Scripts\New\PilotFiring\Tier4PilotFiring\AiTier4PilotFiring.cs" />
+     <Compile Include="Assets\Scripts\New\PilotFiring\Tier5PilotFiring\AiTier5PilotFiring.cs" />
      <Compile Include="Assets\Scripts\New\UserBossMovement.cs" />
      <Compile Include="Assets\Scripts\New\UserPlanetMovement.cs" />
      <Compile Include="Assets\Scripts\New\UserPowerSwitch.cs" />

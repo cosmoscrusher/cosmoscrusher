@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 
 using Assets.Scripts.New;
+using Assets.Scripts.New.PilotFiring;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -109,6 +110,7 @@ namespace Assets.Scripts
                     {
                         collidedShip = collision.gameObject;
                         Destroy(collidedShip.GetComponent<AiPilotMovement>());
+                        Destroy(collidedShip.GetComponent<AiPilotFiring>());
 
                         var currentMovement = GetComponent<UserPlanetMovement>();
 

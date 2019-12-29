@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 using Assets.Scripts.New;
 using Assets.Scripts.New.PilotFiring.Tier1PilotFiring;
+using Assets.Scripts.New.PilotFiring.Tier2PilotFiring;
+using Assets.Scripts.New.PilotFiring.Tier3PilotFiring;
+using Assets.Scripts.New.PilotFiring.Tier4PilotFiring;
+using Assets.Scripts.New.PilotFiring.Tier5PilotFiring;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -151,8 +155,6 @@ namespace Assets.Scripts
                 ship.material = enemyMaterial;
             }
 
-            ship.pilot = new AIPilot(speed * .675f, ship.material);
-            
             var movement = ship.gameObject.AddComponent<AiPilotMovement>();
             movement.speed = speed * .675f;
             movement.secondsToChange = 2;
@@ -162,7 +164,27 @@ namespace Assets.Scripts
                 var firingComponent = ship.gameObject.AddComponent<AiTier1PilotFiring>();
                 firingComponent.bulletPool = bulletPool;
             }
-            
+            else if (tier == 2)
+            {
+                var firingComponent = ship.gameObject.AddComponent<AiTier2PilotFiring>();
+                firingComponent.bulletPool = bulletPool;
+            }
+            else if (tier == 3)
+            {
+                var firingComponent = ship.gameObject.AddComponent<AiTier3PilotFiring>();
+                firingComponent.bulletPool = bulletPool;
+            }
+            else if (tier == 4)
+            {
+                var firingComponent = ship.gameObject.AddComponent<AiTier4PilotFiring>();
+                firingComponent.bulletPool = bulletPool;
+            }
+            else if (tier == 5)
+            {
+                var firingComponent = ship.gameObject.AddComponent<AiTier5PilotFiring>();
+                firingComponent.bulletPool = bulletPool;
+            }
+
             ship.hitMaterial = enemyHitMaterial;
             return ship;
         }
@@ -286,14 +308,14 @@ namespace Assets.Scripts
                             ship.material = nextTierMaterial;
                             ship.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material =
                                 nextTierMaterial;
-                            pilot.ChangeBulletMaterial(nextTierMaterial);
+                            //pilot.ChangeBulletMaterial(nextTierMaterial);
                         }
                         else
                         {
                             ship.material = enemyMaterial;
                             ship.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material =
                                 enemyMaterial;
-                            pilot.ChangeBulletMaterial(enemyMaterial);
+                            //pilot.ChangeBulletMaterial(enemyMaterial);
                         }
                     }
 
