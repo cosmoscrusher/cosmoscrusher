@@ -151,8 +151,9 @@ namespace Assets.Scripts
 
             ship.pilot = new AIPilot(speed * .675f, ship.material);
             
-            var movement = ship.GetComponent<AiPilotMovement>();
+            var movement = ship.gameObject.AddComponent<AiPilotMovement>();
             movement.speed = speed * .675f;
+            movement.secondsToChange = 2;
             
             ship.hitMaterial = enemyHitMaterial;
             return ship;

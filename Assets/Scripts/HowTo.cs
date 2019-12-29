@@ -41,8 +41,6 @@ namespace Assets.Scripts
             playerShip.bulletPool = bulletPool;
             playerShip.tier = 1;
 
-            Destroy(playerShip.GetComponent<AiPilotMovement>());
-
             var movement = playerShip.gameObject.AddComponent<UserPlanetMovement>();
             movement.speed = speed;
             movement.camera = cam;
@@ -51,11 +49,14 @@ namespace Assets.Scripts
             enemyShipOne.material = purpleMaterial;
             enemyShipOne.hitMaterial = enemyHitMaterial;
             enemyShipOne.gameObject.layer = 9;
+            enemyShipOne.health = 5;
+
             enemyShipTwo.pilot = new HowToPilot();
             enemyShipTwo.material = purpleMaterial;
             enemyShipTwo.hitMaterial = enemyHitMaterial;
             enemyShipTwo.gameObject.layer = 9;
             enemyShipTwo.health = 5;
+
             hud.setTier(1);
             GenerateBullets();
             end = false;
