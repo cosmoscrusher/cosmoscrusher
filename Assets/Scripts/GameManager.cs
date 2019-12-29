@@ -302,20 +302,15 @@ namespace Assets.Scripts
 
                     foreach (Ship ship in activeShips)
                     {
-                        AIPilot pilot = (AIPilot) ship.pilot;
                         if (ship.tier - playerShip.tier == 1)
                         {
                             ship.material = nextTierMaterial;
-                            ship.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material =
-                                nextTierMaterial;
-                            //pilot.ChangeBulletMaterial(nextTierMaterial);
+                            ship.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = nextTierMaterial;
                         }
                         else
                         {
                             ship.material = enemyMaterial;
-                            ship.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material =
-                                enemyMaterial;
-                            //pilot.ChangeBulletMaterial(enemyMaterial);
+                            ship.gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = enemyMaterial;
                         }
                     }
 
