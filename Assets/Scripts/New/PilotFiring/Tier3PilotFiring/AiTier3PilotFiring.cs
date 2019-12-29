@@ -28,28 +28,15 @@ namespace Assets.Scripts.New.PilotFiring.Tier3PilotFiring
         {
             if (firing)
             {
-                var shipMaterial = GetComponent<Ship>().material;
-
                 firingDelay = 0;
 
-                for (float x = -1; x < 2; x++)
+                for (var x = -1; x < 2; x++)
                 {
-                    Bullet theBullet = GetNonActiveBullet(bulletPool);
-                    theBullet.color = GetComponent<Ship>().color;
-                    theBullet.gameObject.transform.GetComponent<Renderer>().material = shipMaterial;
-                    theBullet.tier = GetComponent<Ship>().tier;
-                    theBullet.gameObject.layer = 11;
-                    theBullet.isEnemy = true;
-                    theBullet.transform.position = transform.position;
-                    theBullet.transform.rotation = transform.rotation;
-                    theBullet.transform.SetParent(bulletPool.transform);
-                    float angle = 120 * x;
-                    theBullet.gameObject.SetActive(true);
-                    theBullet.startLife();
-                    theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = shipMaterial.color;
-                    theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-                    Transform bulletTransform = theBullet.transform;
-                    bulletTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angle);
+
+                    var bullet = GetNonActiveBullet(bulletPool);
+                    var angle = 120 * x;
+
+                    InitiateBullet(bulletPool, bullet, angle);
                 }
 
                 firing = false;
