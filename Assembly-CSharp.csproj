@@ -82,7 +82,6 @@
      <Compile Include="Assets\Scripts\Pilots\IPilot.cs" />
      <Compile Include="Assets\Scripts\Pilots\UserPilot.cs" />
      <Compile Include="Assets\Scripts\Ship.cs" />
-     <Compile Include="Assets\Scripts\ShipMover.cs" />
      <Compile Include="Assets\Scripts\SoundManager.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>G:/Projects/Github/cosmoscrusher/cosmoscrusher/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
