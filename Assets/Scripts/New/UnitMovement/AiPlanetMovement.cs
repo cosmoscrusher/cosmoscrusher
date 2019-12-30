@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace Assets.Scripts.New.ShipMovement
+namespace Assets.Scripts.New.UnitMovement
 {
     public class AiPlanetMovement : MonoBehaviour
     {

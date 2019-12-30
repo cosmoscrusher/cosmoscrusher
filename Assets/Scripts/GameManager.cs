@@ -6,8 +6,8 @@ using Assets.Scripts.New.PilotFiring.Tier2PilotFiring;
 using Assets.Scripts.New.PilotFiring.Tier3PilotFiring;
 using Assets.Scripts.New.PilotFiring.Tier4PilotFiring;
 using Assets.Scripts.New.PilotFiring.Tier5PilotFiring;
-using Assets.Scripts.New.ShipMovement;
-using Assets.Scripts.New.ShipRotation;
+using Assets.Scripts.New.UnitMovement;
+using Assets.Scripts.New.UnitRotation;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;

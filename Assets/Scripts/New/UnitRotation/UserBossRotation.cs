@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace Assets.Scripts.New.ShipRotation
+namespace Assets.Scripts.New.UnitRotation
 {
     public class UserBossRotation : MonoBehaviour
     {

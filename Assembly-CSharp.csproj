@@ -71,11 +71,11 @@
     <Compile Include="Assets\Scripts\New\PilotFiring\Tier3PilotFiring\AiTier3PilotFiring.cs" />
     <Compile Include="Assets\Scripts\New\PilotFiring\Tier4PilotFiring\AiTier4PilotFiring.cs" />
     <Compile Include="Assets\Scripts\New\PilotFiring\Tier5PilotFiring\AiTier5PilotFiring.cs" />
-    <Compile Include="Assets\Scripts\New\ShipMovement\AiPlanetMovement.cs" />
-    <Compile Include="Assets\Scripts\New\ShipMovement\UserBossMovement.cs" />
-    <Compile Include="Assets\Scripts\New\ShipMovement\UserPlanetMovement.cs" />
-    <Compile Include="Assets\Scripts\New\ShipRotation\UserBossRotation.cs" />
-    <Compile Include="Assets\Scripts\New\ShipRotation\UserPlanetRotation.cs" />
+    <Compile Include="Assets\Scripts\New\UnitMovement\AiPlanetMovement.cs" />
+    <Compile Include="Assets\Scripts\New\UnitMovement\UserBossMovement.cs" />
+    <Compile Include="Assets\Scripts\New\UnitMovement\UserPlanetMovement.cs" />
+    <Compile Include="Assets\Scripts\New\UnitRotation\UserBossRotation.cs" />
+    <Compile Include="Assets\Scripts\New\UnitRotation\UserPlanetRotation.cs" />
     <Compile Include="Assets\Scripts\New\UserPowerSwitch.cs" />
     <Compile Include="Assets\Scripts\ParticleKiller.cs" />
     <Compile Include="Assets\Scripts\Pilots\AIPilot.cs" />
@@ -637,6 +637,9 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>G:/Unity/2019.1.14f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Scripts\New\UnitHealth\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
