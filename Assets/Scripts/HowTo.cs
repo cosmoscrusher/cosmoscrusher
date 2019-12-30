@@ -73,7 +73,7 @@ namespace Assets.Scripts
             {
                 if (playerShip.fireBullets)
                 {
-                    playerPilot.Fire(playerShip.gameObject, bullet.gameObject, bulletPool);
+                    playerPilot.Fire(playerShip.gameObject, bulletPool);
                     playerShip.fireBullets = false;
                     StartCoroutine(playerShip.Countdown());
                 }

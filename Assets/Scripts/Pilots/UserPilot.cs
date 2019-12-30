@@ -35,7 +35,7 @@ namespace Assets.Scripts.Pilots
             return null;
         }
 
-        public void Fire(GameObject ship, GameObject bullet, GameObject bulletPool)
+        public void Fire(GameObject ship, GameObject bulletPool)
         {
             soundManager.PlayBulletFire();
             if (ship.GetComponent<Ship>().tier == 1)

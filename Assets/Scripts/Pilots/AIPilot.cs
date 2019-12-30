@@ -8,7 +8,7 @@ namespace Assets.Scripts.Pilots
         {
         }
 
-        public void Fire(GameObject ship, GameObject bullet, GameObject bulletPool)
+        public void Fire(GameObject ship, GameObject bulletPool)
         {
         }
     }

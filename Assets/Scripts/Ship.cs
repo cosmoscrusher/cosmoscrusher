@@ -42,25 +42,7 @@ namespace Assets.Scripts
                 {
                     if (fireBullets)
                     {
-                        if (tier == 1)
-                        {
-                            pilot.Fire(gameObject, bullet.gameObject, bulletPool);
-                        }
-
-                        else if (tier == 2)
-                        {
-                            pilot.Fire(gameObject, bullet.gameObject, bulletPool);
-                        }
-
-                        else if (tier == 3)
-                        {
-                            pilot.Fire(gameObject, bullet.gameObject, bulletPool);
-                        }
-
-                        else if (tier == 4 || tier == 5)
-                        {
-                            pilot.Fire(gameObject, bullet.gameObject, bulletPool);
-                        }
+                        pilot.Fire(gameObject, bulletPool);
 
                         fireBullets = false;
                         StartCoroutine(Countdown());
@@ -69,7 +51,7 @@ namespace Assets.Scripts
 
                 if (pilot is AIPilot)
                 {
-                    pilot.Fire(gameObject, bullet, bulletPool);
+                    //pilot.Fire(gameObject, bullet, bulletPool);
                 }
             }
         }
