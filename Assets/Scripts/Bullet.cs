@@ -83,7 +83,10 @@ namespace Assets.Scripts
                 GameObject particleSystem = Instantiate(explosion);
                 ParticleSystem system = particleSystem.transform.GetComponentInChildren<ParticleSystem>();
                 system.transform.position = gameObject.transform.position;
-                system.startColor = gameObject.transform.GetComponent<Renderer>().material.color;
+
+                var mainModule = system.main;
+                mainModule.startColor = gameObject.transform.GetComponent<Renderer>().material.color;
+
                 system.Play();
                 gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
                 gameObject.SetActive(false);
@@ -108,7 +111,10 @@ namespace Assets.Scripts
                 GameObject particleSystem = Instantiate(explosion);
                 ParticleSystem system = particleSystem.transform.GetComponentInChildren<ParticleSystem>();
                 system.transform.position = gameObject.transform.position;
-                system.startColor = gameObject.transform.GetComponent<Renderer>().material.color;
+
+                var mainModule = system.main;
+                mainModule.startColor = gameObject.transform.GetComponent<Renderer>().material.color;
+                
                 system.Play();
                 gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
                 gameObject.SetActive(false);
@@ -133,7 +139,10 @@ namespace Assets.Scripts
                 var particleSystem = Instantiate(explosion);
                 var system = particleSystem.transform.GetComponentInChildren<ParticleSystem>();
                 system.transform.position = gameObject.transform.position;
-                system.startColor = gameObject.transform.GetComponent<Renderer>().material.color;
+
+                var mainModule = system.main;
+                mainModule.startColor = gameObject.transform.GetComponent<Renderer>().material.color;
+
                 system.Play();
                 gameObject.SetActive(false);
                 StopAllCoroutines();

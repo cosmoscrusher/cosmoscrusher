@@ -37,7 +37,8 @@ namespace Assets.Scripts.New.PilotFiring
             bullet.transform.rotation = transform.rotation;
             bullet.transform.SetParent(bulletPool.transform);
 
-            bullet.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = shipMaterial.color;
+            var ps = bullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = shipMaterial.color;
             bullet.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
 
             bullet.transform.RotateAround(bullet.transform.position, -bullet.transform.forward, angle);

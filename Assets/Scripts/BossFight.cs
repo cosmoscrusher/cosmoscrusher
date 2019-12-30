@@ -160,7 +160,7 @@ namespace Assets.Scripts
 
         private void clearAllBullets()
         {
-            foreach (Bullet b in bulletPool.GetComponentsInChildren<Bullet>())
+            foreach (var b in bulletPool.GetComponentsInChildren<Bullet>())
             {
                 b.clearBullet();
             }
@@ -269,6 +269,7 @@ namespace Assets.Scripts
             }
 
             //Spin spin 1
+            ParticleSystem.MainModule ps;
             Bullet theBullet = GetNonActiveBullet();
             theBullet.gameObject.transform.GetComponent<Renderer>().material = bulletMaterial;
             theBullet.tier = 5;
@@ -280,7 +281,10 @@ namespace Assets.Scripts
             theBullet.angle = angleOfBullets1;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = bulletMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -315,7 +319,10 @@ namespace Assets.Scripts
             theBullet.angle = angleOfBullets2;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = bulletMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -343,7 +350,10 @@ namespace Assets.Scripts
             theBullet.angle = angleOfBullets3;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = bulletMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -371,7 +381,10 @@ namespace Assets.Scripts
             theBullet.angle = angleOfBullets4;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = bulletMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -399,7 +412,10 @@ namespace Assets.Scripts
             theBullet.angle = 45;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = greenMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -427,7 +443,10 @@ namespace Assets.Scripts
             theBullet.angle = 135;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = blueMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -455,7 +474,10 @@ namespace Assets.Scripts
             theBullet.angle = 225;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = greenMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -483,7 +505,10 @@ namespace Assets.Scripts
             theBullet.angle = 315;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = blueMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -522,8 +547,10 @@ namespace Assets.Scripts
                     theBullet.angle = 3.75f * x;
                     theBullet.transform.position = theBoss.transform.position;
                     theBullet.gameObject.SetActive(true);
-                    theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor =
-                        bulletMaterial.color;
+
+                    var ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                    ps.startColor = bulletMaterial.color;
+
                     theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                     theBoss.gameObject.GetComponent<Renderer>().material = bulletMaterial;
                     theBoss.gameObject.layer = bossLayer;
@@ -576,6 +603,7 @@ namespace Assets.Scripts
             angleOfBullets3 += rateOfChangeOfAngles * Time.deltaTime;
             angleOfBullets4 += rateOfChangeOfAngles * Time.deltaTime;
 
+            ParticleSystem.MainModule ps;
             Bullet theBullet = GetNonActiveBullet();
             //Stationary 1
             theBullet = GetNonActiveBullet();
@@ -589,7 +617,10 @@ namespace Assets.Scripts
             theBullet.angle = 45;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = greenMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -612,7 +643,10 @@ namespace Assets.Scripts
             theBullet.angle = 135;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = blueMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -635,7 +669,10 @@ namespace Assets.Scripts
             theBullet.angle = 225;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = greenMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -658,7 +695,10 @@ namespace Assets.Scripts
             theBullet.angle = 315;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = blueMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -681,7 +721,10 @@ namespace Assets.Scripts
             theBullet.angle = angleOfBullets1;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = blueMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -716,7 +759,10 @@ namespace Assets.Scripts
             theBullet.angle = angleOfBullets2;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = greenMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -744,7 +790,10 @@ namespace Assets.Scripts
             theBullet.angle = angleOfBullets3;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = blueMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = blueMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -772,7 +821,10 @@ namespace Assets.Scripts
             theBullet.angle = angleOfBullets4;
             theBullet.transform.position = theBoss.transform.position;
             theBullet.gameObject.SetActive(true);
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = greenMaterial.color;
+
+            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+            ps.startColor = greenMaterial.color;
+
             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
             theBullet.GetComponent<Bullet>().startLife();
             if (paused)
@@ -808,8 +860,10 @@ namespace Assets.Scripts
                             theBullet.angle = 3.75f * x;
                             theBullet.transform.position = theBoss.transform.position;
                             theBullet.gameObject.SetActive(true);
-                            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor =
-                                bulletMaterial.color;
+
+                            var ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                            ps.startColor = bulletMaterial.color;
+
                             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                             theBullet.GetComponent<Bullet>().startLife();
                             if (paused)
@@ -835,8 +889,10 @@ namespace Assets.Scripts
                             theBullet.angle = 3.75f * x;
                             theBullet.transform.position = theBoss.transform.position;
                             theBullet.gameObject.SetActive(true);
-                            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor =
-                                bulletMaterial.color;
+
+                            var ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                            ps.startColor = bulletMaterial.color;
+
                             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                             theBullet.GetComponent<Bullet>().startLife();
                             if (paused)
@@ -865,8 +921,10 @@ namespace Assets.Scripts
                             theBullet.angle = 3.75f * x;
                             theBullet.transform.position = theBoss.transform.position;
                             theBullet.gameObject.SetActive(true);
-                            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor =
-                                bulletMaterial.color;
+
+                            var ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                            ps.startColor = bulletMaterial.color;
+
                             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                             theBullet.GetComponent<Bullet>().startLife();
                             if (paused)
@@ -892,8 +950,10 @@ namespace Assets.Scripts
                             theBullet.angle = 3.75f * x;
                             theBullet.transform.position = theBoss.transform.position;
                             theBullet.gameObject.SetActive(true);
-                            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().startColor =
-                                bulletMaterial.color;
+
+                            var ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                            ps.startColor = bulletMaterial.color;
+
                             theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                             theBullet.GetComponent<Bullet>().startLife();
                             if (paused)

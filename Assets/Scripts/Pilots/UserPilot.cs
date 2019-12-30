@@ -63,7 +63,10 @@ namespace Assets.Scripts.Pilots
 
                 theBullet.gameObject.SetActive(true);
                 theBullet.startLife();
-                theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+              
+                var ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                ps.startColor = bulletMaterial.color;
+
                 theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                 theBullet.transform.position = ship.transform.position;
                 theBullet.transform.rotation = ship.transform.rotation;
@@ -123,7 +126,10 @@ namespace Assets.Scripts.Pilots
 
                         theBullet.gameObject.SetActive(true);
                         theBullet.startLife();
-                        theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+
+                        var ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                        ps.startColor = bulletMaterial.color;
+
                         theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                         theBullet.transform.rotation = ship.transform.rotation;
                         theBullet.transform.RotateAround(ship.transform.position, -theBullet.transform.forward, angle);
@@ -159,7 +165,10 @@ namespace Assets.Scripts.Pilots
 
                     theBullet.gameObject.SetActive(true);
                     theBullet.startLife();
-                    theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+
+                    var ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                    ps.startColor = bulletMaterial.color;
+
                     theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                     theBullet.transform.position = ship.transform.position;
                     theBullet.transform.rotation = ship.transform.rotation;
@@ -237,7 +246,10 @@ namespace Assets.Scripts.Pilots
 
                     theBullet.gameObject.SetActive(true);
                     theBullet.startLife();
-                    theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().startColor = bulletMaterial.color;
+
+                    var ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+                    ps.startColor = bulletMaterial.color;
+
                     theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
                     theBullet.transform.position = ship.transform.position;
                     theBullet.transform.rotation = ship.transform.rotation;
