@@ -2,12 +2,11 @@
 
 using UnityEngine;
 
-namespace Assets.Scripts.New
+namespace Assets.Scripts.New.ShipMovement
 {
     public class UserBossMovement : MonoBehaviour
     {
         public float speed;
-        public GameObject camera;
 
         [UsedImplicitly]
         void Update()
@@ -58,21 +57,6 @@ namespace Assets.Scripts.New
                     currentTransform.Translate(Vector3.right * speed * Time.deltaTime);
                 }
             }
-
-            var mouse = Input.mousePosition;
-            var cam = camera.GetComponent<Camera>();
-            mouse.z = transform.position.z - camera.transform.position.z;
-            mouse = cam.ScreenToWorldPoint(mouse);
-            var angleLine = Vector3.Normalize(mouse - transform.position);
-            var angle = Vector3.Angle(Vector3.up, angleLine);
-            if (angleLine.x < 0)
-            {
-                angle = -angle;
-            }
-
-            currentTransform.GetChild(0).rotation = currentTransform.rotation;
-            currentTransform.GetChild(0).RotateAround(currentTransform.transform.position,
-                -currentTransform.transform.forward, angle);
         }
     }
 }

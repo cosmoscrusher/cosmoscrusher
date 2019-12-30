@@ -2,12 +2,11 @@
 
 using UnityEngine;
 
-namespace Assets.Scripts.New
+namespace Assets.Scripts.New.ShipMovement
 {
     public class UserPlanetMovement : MonoBehaviour
     {
         public float speed;
-        public GameObject camera;
 
         [UsedImplicitly]
         public void Update()
@@ -30,48 +29,28 @@ namespace Assets.Scripts.New
             if (Input.anyKey)
             {
                 Vector3 frontDirection = Vector3.Normalize(currentTransform.transform.up) * speed * Time.deltaTime;
-                //(currentTransform.position - frontTransform.position).normalized * speed;
                 Vector3 leftDirection = Vector3.Normalize(-currentTransform.transform.right) * speed * Time.deltaTime;
-                //(currentTransform.position - leftTransform.position).normalized * speed;
 
                 if (Input.GetKey(KeyCode.W))
                 {
                     currentTransform.RotateAround(Vector3.zero, leftDirection, -speed * Time.deltaTime);
-                    //currentTransform.position += frontDirection;
                 }
 
                 if (Input.GetKey(KeyCode.A))
                 {
                     currentTransform.RotateAround(Vector3.zero, frontDirection, speed * Time.deltaTime);
-                    //currentTransform.position += leftDirection;
                 }
 
                 if (Input.GetKey(KeyCode.S))
                 {
                     currentTransform.RotateAround(Vector3.zero, leftDirection, speed * Time.deltaTime);
-                    //currentTransform.position += -frontDirection;
                 }
 
                 if (Input.GetKey(KeyCode.D))
                 {
                     currentTransform.RotateAround(Vector3.zero, frontDirection, -speed * Time.deltaTime);
-                    //currentTransform.position += -leftDirection;
                 }
             }
-
-            var mouse = Input.mousePosition;
-            var cam = camera.GetComponent<Camera>();
-            mouse.x -= cam.pixelWidth / 2;
-            mouse.y -= cam.pixelHeight / 2;
-            mouse = Vector3.Normalize(mouse);
-            var angle = Vector3.Angle(Vector3.up, mouse);
-            if (mouse.x < 0)
-            {
-                angle = -angle;
-            }
-
-            currentTransform.GetChild(0).rotation = currentTransform.rotation;
-            currentTransform.GetChild(0).RotateAround(currentTransform.position, -currentTransform.forward, angle);
         }
     }
 }

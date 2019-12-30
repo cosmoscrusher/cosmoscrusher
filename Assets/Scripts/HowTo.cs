@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 
-using Assets.Scripts.New;
+using Assets.Scripts.New.ShipMovement;
+using Assets.Scripts.New.ShipRotation;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -44,7 +45,9 @@ namespace Assets.Scripts
 
             var movement = playerShip.gameObject.AddComponent<UserPlanetMovement>();
             movement.speed = speed;
-            movement.camera = cam;
+
+            var rotation = playerShip.gameObject.AddComponent<UserPlanetRotation>();
+            rotation.camera = cam;
 
             enemyShipOne.pilot = new HowToPilot();
             enemyShipOne.material = purpleMaterial;

@@ -21,7 +21,7 @@ namespace Assets.Scripts.New
             ChangePowers();
         }
 
-        public void ChangePowers()
+        private void ChangePowers()
         {
             if (Input.GetMouseButtonDown(1))
             {

@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-using Assets.Scripts.New;
 using Assets.Scripts.New.PilotFiring.Tier1PilotFiring;
 using Assets.Scripts.New.PilotFiring.Tier2PilotFiring;
 using Assets.Scripts.New.PilotFiring.Tier3PilotFiring;
 using Assets.Scripts.New.PilotFiring.Tier4PilotFiring;
 using Assets.Scripts.New.PilotFiring.Tier5PilotFiring;
+using Assets.Scripts.New.ShipMovement;
+using Assets.Scripts.New.ShipRotation;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -113,10 +114,13 @@ namespace Assets.Scripts
             ship.material = playerMaterial;
             ship.hitMaterial = playerHitMaterial;
 
-            Destroy(ship.GetComponent<AiPilotMovement>());
+            Destroy(ship.GetComponent<AiPlanetMovement>());
+
             var movement = ship.gameObject.AddComponent<UserPlanetMovement>();
             movement.speed = speed;
-            movement.camera = cam;
+
+            var rotation = ship.gameObject.AddComponent<UserPlanetRotation>();
+            rotation.camera = cam;
 
             return ship;
         }
@@ -155,7 +159,7 @@ namespace Assets.Scripts
                 ship.material = enemyMaterial;
             }
 
-            var movement = ship.gameObject.AddComponent<AiPilotMovement>();
+            var movement = ship.gameObject.AddComponent<AiPlanetMovement>();
             movement.speed = speed * .675f;
             movement.secondsToChange = 2;
 

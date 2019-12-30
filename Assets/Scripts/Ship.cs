@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 
-using Assets.Scripts.New;
 using Assets.Scripts.New.PilotFiring;
+using Assets.Scripts.New.ShipMovement;
+using Assets.Scripts.New.ShipRotation;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -91,7 +92,7 @@ namespace Assets.Scripts
                     if (collision.gameObject.GetComponent<Ship>().tier == tier + 1)
                     {
                         collidedShip = collision.gameObject;
-                        Destroy(collidedShip.GetComponent<AiPilotMovement>());
+                        Destroy(collidedShip.GetComponent<AiPlanetMovement>());
                         var aiComponents = collidedShip.GetComponents<AiPilotFiring>();
                         foreach (var aiComponent in aiComponents)
                         {
@@ -99,10 +100,13 @@ namespace Assets.Scripts
                         }
 
                         var currentMovement = GetComponent<UserPlanetMovement>();
+                        var currentRotation = GetComponent<UserPlanetRotation>();
 
                         var movement = collidedShip.AddComponent<UserPlanetMovement>();
                         movement.speed = currentMovement.speed;
-                        movement.camera = currentMovement.camera;
+
+                        var rotation = collidedShip.gameObject.AddComponent<UserPlanetRotation>();
+                        rotation.camera = currentRotation.camera;
 
                         if (hud != null)
                         {

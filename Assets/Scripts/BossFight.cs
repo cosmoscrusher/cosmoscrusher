@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 
 using Assets.Scripts.New;
+using Assets.Scripts.New.ShipMovement;
+using Assets.Scripts.New.ShipRotation;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -959,7 +961,9 @@ namespace Assets.Scripts
 
             var movement = ship.gameObject.AddComponent<UserBossMovement>();
             movement.speed = 30;
-            movement.camera = cam;
+            
+            var rotation = ship.gameObject.AddComponent<UserBossRotation>();
+            rotation.camera = cam;
 
             ship.gameObject.AddComponent<UserPowerSwitch>();
 

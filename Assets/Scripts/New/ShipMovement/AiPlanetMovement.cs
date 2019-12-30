@@ -2,9 +2,9 @@
 
 using UnityEngine;
 
-namespace Assets.Scripts.New
+namespace Assets.Scripts.New.ShipMovement
 {
-    public class AiPilotMovement : MonoBehaviour
+    public class AiPlanetMovement : MonoBehaviour
     {
         public float secondsToChange = 2.0f;
         public float speed;
