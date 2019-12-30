@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts
+namespace Assets.Scripts.New.UnitHealth
 {
-    public class Boss : MonoBehaviour
+    public class BossHealth : MonoBehaviour
     {
         public BossHUD bossHUD;
 
@@ -14,7 +14,7 @@ namespace Assets.Scripts
             bossHUD.setBossStats(Health, shield);
         }
 
-        public void takeDamage(int damage)
+        public void TakeDamage(int damage)
         {
             if (shield > 0)
             {

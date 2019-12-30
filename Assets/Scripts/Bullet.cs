@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.New.UnitHealth;
+
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -127,15 +129,15 @@ namespace Assets.Scripts
 
             if (collision.gameObject.layer == 16 || collision.gameObject.layer == 19 || collision.gameObject.layer == 20)
             {
-                Boss theBoss = collision.gameObject.GetComponent<Boss>();
-                GameObject particleSystem = Instantiate(explosion);
-                ParticleSystem system = particleSystem.transform.GetComponentInChildren<ParticleSystem>();
+                var theBoss = collision.gameObject.GetComponent<BossHealth>();
+                var particleSystem = Instantiate(explosion);
+                var system = particleSystem.transform.GetComponentInChildren<ParticleSystem>();
                 system.transform.position = gameObject.transform.position;
                 system.startColor = gameObject.transform.GetComponent<Renderer>().material.color;
                 system.Play();
                 gameObject.SetActive(false);
                 StopAllCoroutines();
-                theBoss.takeDamage(1);
+                theBoss.TakeDamage(1);
             }
         }
         //public void startLife()

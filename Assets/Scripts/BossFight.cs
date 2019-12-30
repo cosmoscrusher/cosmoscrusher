@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 
 using Assets.Scripts.New;
+using Assets.Scripts.New.UnitHealth;
 using Assets.Scripts.New.UnitMovement;
 using Assets.Scripts.New.UnitRotation;
 using Assets.Scripts.Pilots;
@@ -116,7 +117,7 @@ namespace Assets.Scripts
 
             if (!gameOver)
             {
-                if (theBoss.GetComponent<Boss>().shield > 0)
+                if (theBoss.GetComponent<BossHealth>().shield > 0)
                 {
                     Flood();
                 }
@@ -132,7 +133,7 @@ namespace Assets.Scripts
                 }
             }
 
-            if (theBoss != null && theBoss.GetComponent<Boss>().Health <= 0)
+            if (theBoss != null && theBoss.GetComponent<BossHealth>().Health <= 0)
             {
                 soundManager.PlayBossDestruction();
                 StopAllCoroutines();
