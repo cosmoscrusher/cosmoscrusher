@@ -61,6 +61,12 @@ namespace Assets.Scripts
             GenerateBullets();
             soundManager.PlayBossBackground();
 
+            StartCoroutine(StartDelay());
+        }
+
+        private IEnumerator StartDelay()
+        {
+            yield return new WaitForSeconds(1.0f);
             AddBoss();
         }
 
@@ -502,8 +508,8 @@ namespace Assets.Scripts
 
         public void MakeShip()
         {
-            Vector3 position = new Vector3(0, -50.6f, 94.1f);
-            Ship ship = Instantiate(theShip) as Ship;
+            var position = new Vector3(0, -50.6f, 94.1f);
+            var ship = Instantiate(theShip) as Ship;
             ship.transform.position = position;
             ship.gameObject.layer = 12;
             ship.health = 5;
@@ -533,7 +539,7 @@ namespace Assets.Scripts
 
         private IEnumerator ChangePhase()
         {
-            phaseShifted = true;
+            shiftStarted = true;
             theBoss.gameObject.layer = 21;
             theBoss.gameObject.transform.GetComponent<Renderer>().material = purpleMaterial;
 
@@ -544,6 +550,7 @@ namespace Assets.Scripts
             }
 
             yield return new WaitForSeconds(1.95f);
+            phaseShifted = true;
 
             AddRotatingFiringBoss(0, 55, 11, bulletMaterial);
             AddRotatingFiringBoss(90, 55, 11, bulletMaterial);
