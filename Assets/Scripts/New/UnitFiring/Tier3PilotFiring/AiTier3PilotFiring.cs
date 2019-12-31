@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.New.PilotFiring.Tier3PilotFiring
+namespace Assets.Scripts.New.UnitFiring.Tier3PilotFiring
 {
     //TODO: Better Name would help
     public class AiTier3PilotFiring : AiPilotFiring

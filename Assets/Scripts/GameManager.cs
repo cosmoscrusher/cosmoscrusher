@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-using Assets.Scripts.New.PilotFiring.Tier1PilotFiring;
-using Assets.Scripts.New.PilotFiring.Tier2PilotFiring;
-using Assets.Scripts.New.PilotFiring.Tier3PilotFiring;
-using Assets.Scripts.New.PilotFiring.Tier4PilotFiring;
-using Assets.Scripts.New.PilotFiring.Tier5PilotFiring;
+using Assets.Scripts.New.UnitFiring.Tier1PilotFiring;
+using Assets.Scripts.New.UnitFiring.Tier2PilotFiring;
+using Assets.Scripts.New.UnitFiring.Tier3PilotFiring;
+using Assets.Scripts.New.UnitFiring.Tier4PilotFiring;
+using Assets.Scripts.New.UnitFiring.Tier5PilotFiring;
 using Assets.Scripts.New.UnitMovement;
 using Assets.Scripts.New.UnitRotation;
 using Assets.Scripts.Pilots;

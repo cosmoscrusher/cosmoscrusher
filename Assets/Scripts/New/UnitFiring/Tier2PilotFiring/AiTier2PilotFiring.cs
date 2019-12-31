@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.New.PilotFiring.Tier5PilotFiring
+namespace Assets.Scripts.New.UnitFiring.Tier2PilotFiring
 {
     //TODO: Better Name would help
-    public class AiTier5PilotFiring : AiPilotFiring
+    public class AiTier2PilotFiring : AiPilotFiring
     {
         public GameObject bulletPool;
 
         private bool firing;
         private float firingDelay;
-        private int tier5Increment;
 
         void Update()
         {
@@ -31,20 +30,14 @@ namespace Assets.Scripts.New.PilotFiring.Tier5PilotFiring
             {
                 firingDelay = 0;
 
-                var angle = 30 * tier5Increment;
-
-                var bullet1 = GetNonActiveBullet(bulletPool);
-                InitiateBullet(bulletPool, bullet1, angle);
-
-                var bullet2 = GetNonActiveBullet(bulletPool);
-                InitiateBullet(bulletPool, bullet2, -angle);
-
-                if (tier5Increment == 12)
+                for (var x = 0; x < 12; x++)
                 {
-                    tier5Increment = 0;
-                }
 
-                tier5Increment++;
+                    var bullet = GetNonActiveBullet(bulletPool);
+                    var angle = 30 * x;
+
+                    InitiateBullet(bulletPool, bullet, angle);
+                }
 
                 firing = false;
             }
@@ -53,7 +46,7 @@ namespace Assets.Scripts.New.PilotFiring.Tier5PilotFiring
             {
                 firingDelay += Time.deltaTime;
 
-                if (firingDelay >= .08)
+                if (firingDelay >= 2.5f)
                 {
                     firing = true;
                 }

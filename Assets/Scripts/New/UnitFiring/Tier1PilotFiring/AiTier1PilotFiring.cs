@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.New.PilotFiring.Tier4PilotFiring
+namespace Assets.Scripts.New.UnitFiring.Tier1PilotFiring
 {
     //TODO: Better Name would help
-    public class AiTier4PilotFiring : AiPilotFiring
+    public class AiTier1PilotFiring : AiPilotFiring
     {
         public GameObject bulletPool;
 
         private bool firing;
         private float firingDelay;
-        private int tier4Increment;
 
         void Update()
         {
@@ -32,24 +31,18 @@ namespace Assets.Scripts.New.PilotFiring.Tier4PilotFiring
                 firingDelay = 0;
 
                 var bullet = GetNonActiveBullet(bulletPool);
-                var angle = 30 * tier4Increment;
-
-                if (tier4Increment == 12)
-                {
-                    tier4Increment = 0;
-                }
-
-                tier4Increment++;
+                var angle = 0;
 
                 InitiateBullet(bulletPool, bullet, angle);
 
                 firing = false;
             }
+
             else
             {
                 firingDelay += Time.deltaTime;
 
-                if (firingDelay >= .1)
+                if (firingDelay >= 0.25)
                 {
                     firing = true;
                 }

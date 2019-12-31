@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.New.PilotFiring
+namespace Assets.Scripts.New.UnitFiring
 {
     public class AiPilotFiring : MonoBehaviour
     {

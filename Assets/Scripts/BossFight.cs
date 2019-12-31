@@ -129,7 +129,7 @@ namespace Assets.Scripts
 
                 else if (!shiftStarted)
                 {
-                    StartCoroutine(changePhase());
+                    StartCoroutine(ChangePhase());
                 }
             }
 
@@ -1031,7 +1031,7 @@ namespace Assets.Scripts
             playerShip = ship;
         }
 
-        private IEnumerator changePhase()
+        private IEnumerator ChangePhase()
         {
             theBoss.gameObject.layer = 21;
             theBoss.gameObject.transform.GetComponent<Renderer>().material = purpleMaterial;
