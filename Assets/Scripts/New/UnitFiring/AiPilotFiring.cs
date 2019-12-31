@@ -2,25 +2,9 @@
 
 namespace Assets.Scripts.New.UnitFiring
 {
-    public class AiPilotFiring : MonoBehaviour
+    public class AiPilotFiring : UnitFiring
     {
-        public Bullet GetNonActiveBullet(GameObject bulletPool)
-        {
-            for (int i = 0; i < bulletPool.transform.childCount; ++i)
-            {
-                if (!bulletPool.transform.GetChild(i).gameObject.activeSelf)
-                {
-                    Bullet bill = bulletPool.transform.GetChild(i).GetComponent<Bullet>();
-                    bill.transform.rotation = new Quaternion();
-                    return bill;
-                }
-            }
-
-            Debug.LogError("NOT Enough Bullets");
-            return null;
-        }
-
-        public void InitiateBullet(GameObject bulletPool, Bullet bullet, int angle)
+        public void InitiateBullet(GameObject bulletPool, Bullet bullet, float angle)
         {
             var shipMaterial = GetComponent<Ship>().material;
 

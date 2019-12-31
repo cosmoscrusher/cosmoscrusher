@@ -64,11 +64,13 @@
      <Compile Include="Assets\Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\MenuManager.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\AiPilotFiring.cs" />
+     <Compile Include="Assets\Scripts\New\UnitFiring\BossFiring\BossStraightFiring.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\Tier1PilotFiring\AiTier1PilotFiring.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\Tier2PilotFiring\AiTier2PilotFiring.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\Tier3PilotFiring\AiTier3PilotFiring.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\Tier4PilotFiring\AiTier4PilotFiring.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\Tier5PilotFiring\AiTier5PilotFiring.cs" />
+     <Compile Include="Assets\Scripts\New\UnitFiring\UnitFiring.cs" />
      <Compile Include="Assets\Scripts\New\UnitHealth\BossHealth.cs" />
      <Compile Include="Assets\Scripts\New\UnitMovement\AiPlanetMovement.cs" />
      <Compile Include="Assets\Scripts\New\UnitMovement\UserBossMovement.cs" />
