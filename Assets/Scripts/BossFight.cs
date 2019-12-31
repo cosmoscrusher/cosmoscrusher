@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 
 using Assets.Scripts.New;
-using Assets.Scripts.New.UnitFiring.BossFiring;
+using Assets.Scripts.New.UnitFiring.BossWeapons;
 using Assets.Scripts.New.UnitHealth;
 using Assets.Scripts.New.UnitMovement;
 using Assets.Scripts.New.UnitRotation;
@@ -35,12 +35,6 @@ namespace Assets.Scripts
         public GameObject gameOverWin;
         public GameObject pauseScreen;
 
-        private float angleOfBullets1;
-        private float angleOfBullets2;
-        private float angleOfBullets3;
-        private float angleOfBullets4;
-        private float rateOfChangeOfAngles;
-        private bool firing = true;
         private bool flood = false;
         private float floodDelay = 0.0f;
         private bool floodSwitch = false;
@@ -63,14 +57,8 @@ namespace Assets.Scripts
 
         void Start()
         {
-            rateOfChangeOfAngles = 55.0f;
-            angleOfBullets1 = 0;
-            angleOfBullets2 = 90;
-            angleOfBullets3 = 180;
-            angleOfBullets4 = 270;
             MakeShip();
             GenerateBullets();
-            StartCoroutine(StartDelay());
             soundManager.PlayBossBackground();
 
             AddBoss();
@@ -91,7 +79,7 @@ namespace Assets.Scripts
 
         private void AddStraightFiringBoss(float angle, int layer, Material weaponMaterial)
         {
-            var straightFiring1 = theBoss.AddComponent<BossStraightFiring>();
+            var straightFiring1 = theBoss.AddComponent<StraightBossWeapons>();
             straightFiring1.bulletPool = bulletPool;
             straightFiring1.angle = angle;
             straightFiring1.layer = layer;
@@ -100,7 +88,7 @@ namespace Assets.Scripts
 
         private void AddRotatingFiringBoss(float startAngle, float angleRateOfChange, int layer, Material weaponMaterial)
         {
-            var straightFiring1 = theBoss.AddComponent<BossRotatingFiring>();
+            var straightFiring1 = theBoss.AddComponent<RotatingBossWeapons>();
             straightFiring1.bulletPool = bulletPool;
             straightFiring1.angle = startAngle;
             straightFiring1.rateOfChangeOfAngles = angleRateOfChange;
@@ -144,12 +132,6 @@ namespace Assets.Scripts
                 pauseGame();
             }
 
-            if (!firing)
-            {
-                firing = true;
-                StartCoroutine(Fire());
-            }
-
             if (!gameOver)
             {
                 if (theBoss.GetComponent<BossHealth>().shield > 0)
@@ -172,18 +154,17 @@ namespace Assets.Scripts
             {
                 soundManager.PlayBossDestruction();
                 StopAllCoroutines();
-                firing = true;
                 gameOverWin.SetActive(true);
                 Destroy(theBoss.gameObject);
                 gameOver = true;
                 playerShip.gameOver = true;
 
-                var bossStraightFiringComponents = theBoss.GetComponents<BossStraightFiring>();
+                var bossStraightFiringComponents = theBoss.GetComponents<StraightBossWeapons>();
                 foreach (var bossStraightFiringComponent in bossStraightFiringComponents)
                 {
                     bossStraightFiringComponent.gameOver = true;
                 }
-                var bossRotatingFiringComponents = theBoss.GetComponents<BossRotatingFiring>();
+                var bossRotatingFiringComponents = theBoss.GetComponents<RotatingBossWeapons>();
                 foreach (var bossRotatingFiringComponent in bossRotatingFiringComponents)
                 {
                     bossRotatingFiringComponent.gameOver = true;
@@ -197,16 +178,15 @@ namespace Assets.Scripts
             {
                 soundManager.PlayShipDestruction();
                 StopAllCoroutines();
-                firing = true;
                 gameOverLose.SetActive(true);
                 Destroy(playerShip.gameObject);
                 gameOver = true;
-                var bossStraightFiringComponents = theBoss.GetComponents<BossStraightFiring>();
+                var bossStraightFiringComponents = theBoss.GetComponents<StraightBossWeapons>();
                 foreach (var bossStraightFiringComponent in bossStraightFiringComponents)
                 {
                     bossStraightFiringComponent.gameOver = true;
                 }
-                var bossRotatingFiringComponents = theBoss.GetComponents<BossRotatingFiring>();
+                var bossRotatingFiringComponents = theBoss.GetComponents<RotatingBossWeapons>();
                 foreach (var bossRotatingFiringComponent in bossRotatingFiringComponents)
                 {
                     bossRotatingFiringComponent.gameOver = true;
@@ -228,12 +208,12 @@ namespace Assets.Scripts
             pauseScreen.SetActive(true);
             playerShip.paused = true;
             paused = true;
-            var bossStraightFiringComponents = theBoss.GetComponents<BossStraightFiring>();
+            var bossStraightFiringComponents = theBoss.GetComponents<StraightBossWeapons>();
             foreach (var bossStraightFiringComponent in bossStraightFiringComponents)
             {
                 bossStraightFiringComponent.paused = true;
             }
-            var bossRotatingFiringComponents = theBoss.GetComponents<BossRotatingFiring>();
+            var bossRotatingFiringComponents = theBoss.GetComponents<RotatingBossWeapons>();
             foreach (var bossRotatingFiringComponent in bossRotatingFiringComponents)
             {
                 bossRotatingFiringComponent.paused = true;
@@ -250,12 +230,12 @@ namespace Assets.Scripts
         {
             pauseScreen.SetActive(false);
             playerShip.paused = false;
-            var bossStraightFiringComponents = theBoss.GetComponents<BossStraightFiring>();
+            var bossStraightFiringComponents = theBoss.GetComponents<StraightBossWeapons>();
             foreach (var bossStraightFiringComponent in bossStraightFiringComponents)
             {
                 bossStraightFiringComponent.paused = false;
             }
-            var bossRotatingFiringComponents = theBoss.GetComponents<BossRotatingFiring>();
+            var bossRotatingFiringComponents = theBoss.GetComponents<RotatingBossWeapons>();
             foreach (var bossRotatingFiringComponent in bossRotatingFiringComponents)
             {
                 bossRotatingFiringComponent.paused = false;
@@ -267,28 +247,6 @@ namespace Assets.Scripts
 
             paused = false;
             soundManager.UnPauseSounds();
-        }
-
-        private IEnumerator StartDelay()
-        {
-            yield return new WaitForSeconds(1.0f);
-            firing = false;
-        }
-
-        IEnumerator Fire()
-        {
-            yield return new WaitForSeconds(0.005f);
-
-            if (!phaseShifted)
-            {
-            }
-
-            else if (phaseShifted)
-            {
-                BossFire();
-            }
-
-            firing = false;
         }
 
         private Bullet GetNonActiveBullet()
@@ -315,285 +273,6 @@ namespace Assets.Scripts
 
             Debug.LogError("NOT Enough Bullets");
             return null;
-        }
-
-        void BossFire()
-        {
-            if (paused)
-            {
-                return;
-            }
-
-            angleOfBullets1 %= 360;
-            angleOfBullets2 %= 360;
-            angleOfBullets3 %= 360;
-            angleOfBullets4 %= 360;
-
-            if (paused)
-            {
-                return;
-            }
-
-            angleOfBullets1 += rateOfChangeOfAngles * Time.deltaTime;
-            angleOfBullets2 += rateOfChangeOfAngles * Time.deltaTime;
-            angleOfBullets3 += rateOfChangeOfAngles * Time.deltaTime;
-            angleOfBullets4 += rateOfChangeOfAngles * Time.deltaTime;
-
-            if (paused)
-            {
-                return;
-            }
-
-            //Spin spin 1
-            ParticleSystem.MainModule ps;
-            Bullet theBullet = GetNonActiveBullet();
-            theBullet.gameObject.transform.GetComponent<Renderer>().material = bulletMaterial;
-            theBullet.tier = 5;
-            theBullet.gameObject.layer = 11;
-            theBullet.isEnemy = true;
-            theBullet.isBoss = true;
-            theBullet.isPulse = false;
-            theBullet.isFlood = false;
-            theBullet.angle = angleOfBullets1;
-            theBullet.transform.position = theBoss.transform.position;
-            theBullet.gameObject.SetActive(true);
-
-            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-            ps.startColor = bulletMaterial.color;
-
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-            theBullet.GetComponent<Bullet>().startLife();
-            if (paused)
-            {
-                theBullet.paused = true;
-            }
-
-            if (paused)
-            {
-                return;
-            }
-
-            //Transform bulletTransform = bullet.transform;
-            //bulletTransform.Translate(Vector3.down * Time.deltaTime);
-            Transform currentTransform = theBullet.transform;
-            currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets1);
-
-            if (paused)
-            {
-                return;
-            }
-
-            //Spin spin 2
-            theBullet = GetNonActiveBullet();
-            theBullet.gameObject.transform.GetComponent<Renderer>().material = bulletMaterial;
-            theBullet.tier = 5;
-            theBullet.gameObject.layer = 11;
-            theBullet.isEnemy = true;
-            theBullet.isBoss = true;
-            theBullet.isPulse = false;
-            theBullet.isFlood = false;
-            theBullet.angle = angleOfBullets2;
-            theBullet.transform.position = theBoss.transform.position;
-            theBullet.gameObject.SetActive(true);
-
-            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-            ps.startColor = bulletMaterial.color;
-
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-            theBullet.GetComponent<Bullet>().startLife();
-            if (paused)
-            {
-                theBullet.paused = true;
-            }
-
-            currentTransform = theBullet.transform;
-            currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets2);
-
-            if (paused)
-            {
-                return;
-            }
-
-            //Spin spin 3
-            theBullet = GetNonActiveBullet();
-            theBullet.gameObject.transform.GetComponent<Renderer>().material = bulletMaterial;
-            theBullet.tier = 5;
-            theBullet.gameObject.layer = 11;
-            theBullet.isEnemy = true;
-            theBullet.isBoss = true;
-            theBullet.isPulse = false;
-            theBullet.isFlood = false;
-            theBullet.angle = angleOfBullets3;
-            theBullet.transform.position = theBoss.transform.position;
-            theBullet.gameObject.SetActive(true);
-
-            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-            ps.startColor = bulletMaterial.color;
-
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-            theBullet.GetComponent<Bullet>().startLife();
-            if (paused)
-            {
-                theBullet.paused = true;
-            }
-
-            currentTransform = theBullet.transform;
-            currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets3);
-
-            if (paused)
-            {
-                return;
-            }
-
-            //Spin spin 4
-            theBullet = GetNonActiveBullet();
-            theBullet.gameObject.transform.GetComponent<Renderer>().material = bulletMaterial;
-            theBullet.tier = 5;
-            theBullet.gameObject.layer = 11;
-            theBullet.isEnemy = true;
-            theBullet.isBoss = true;
-            theBullet.isPulse = false;
-            theBullet.isFlood = false;
-            theBullet.angle = angleOfBullets4;
-            theBullet.transform.position = theBoss.transform.position;
-            theBullet.gameObject.SetActive(true);
-
-            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-            ps.startColor = bulletMaterial.color;
-
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-            theBullet.GetComponent<Bullet>().startLife();
-            if (paused)
-            {
-                theBullet.paused = true;
-            }
-
-            currentTransform = theBullet.transform;
-            currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, angleOfBullets4);
-
-            if (paused)
-            {
-                return;
-            }
-
-            //Stationary 1
-            theBullet = GetNonActiveBullet();
-            theBullet.gameObject.transform.GetComponent<Renderer>().material = greenMaterial;
-            theBullet.tier = 5;
-            theBullet.gameObject.layer = 15;
-            theBullet.isEnemy = true;
-            theBullet.isBoss = true;
-            theBullet.isPulse = false;
-            theBullet.isFlood = false;
-            theBullet.angle = 45;
-            theBullet.transform.position = theBoss.transform.position;
-            theBullet.gameObject.SetActive(true);
-
-            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-            ps.startColor = greenMaterial.color;
-
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-            theBullet.GetComponent<Bullet>().startLife();
-            if (paused)
-            {
-                theBullet.paused = true;
-            }
-
-            currentTransform = theBullet.transform;
-            currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 45);
-
-            if (paused)
-            {
-                return;
-            }
-
-            //Stationary 2
-            theBullet = GetNonActiveBullet();
-            theBullet.gameObject.transform.GetComponent<Renderer>().material = blueMaterial;
-            theBullet.tier = 5;
-            theBullet.gameObject.layer = 14;
-            theBullet.isEnemy = true;
-            theBullet.isBoss = true;
-            theBullet.isPulse = false;
-            theBullet.isFlood = false;
-            theBullet.angle = 135;
-            theBullet.transform.position = theBoss.transform.position;
-            theBullet.gameObject.SetActive(true);
-
-            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-            ps.startColor = blueMaterial.color;
-
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-            theBullet.GetComponent<Bullet>().startLife();
-            if (paused)
-            {
-                theBullet.paused = true;
-            }
-
-            currentTransform = theBullet.transform;
-            currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 135);
-
-            if (paused)
-            {
-                return;
-            }
-
-            //Stationary 3
-            theBullet = GetNonActiveBullet();
-            theBullet.gameObject.transform.GetComponent<Renderer>().material = greenMaterial;
-            theBullet.tier = 5;
-            theBullet.gameObject.layer = 15;
-            theBullet.isEnemy = true;
-            theBullet.isBoss = true;
-            theBullet.isPulse = false;
-            theBullet.isFlood = false;
-            theBullet.angle = 225;
-            theBullet.transform.position = theBoss.transform.position;
-            theBullet.gameObject.SetActive(true);
-
-            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-            ps.startColor = greenMaterial.color;
-
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-            theBullet.GetComponent<Bullet>().startLife();
-            if (paused)
-            {
-                theBullet.paused = true;
-            }
-
-            currentTransform = theBullet.transform;
-            currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 225);
-
-            if (paused)
-            {
-                return;
-            }
-
-            //Stationary 4
-            theBullet = GetNonActiveBullet();
-            theBullet.gameObject.transform.GetComponent<Renderer>().material = blueMaterial;
-            theBullet.tier = 5;
-            theBullet.gameObject.layer = 14;
-            theBullet.isEnemy = true;
-            theBullet.isBoss = true;
-            theBullet.isPulse = false;
-            theBullet.isFlood = false;
-            theBullet.angle = 315;
-            theBullet.transform.position = theBoss.transform.position;
-            theBullet.gameObject.SetActive(true);
-
-            ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-            ps.startColor = blueMaterial.color;
-
-            theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-            theBullet.GetComponent<Bullet>().startLife();
-            if (paused)
-            {
-                theBullet.paused = true;
-            }
-
-            currentTransform = theBullet.transform;
-            currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward, 315);
         }
 
         private void Pulse()
@@ -854,21 +533,22 @@ namespace Assets.Scripts
 
         private IEnumerator ChangePhase()
         {
+            phaseShifted = true;
             theBoss.gameObject.layer = 21;
             theBoss.gameObject.transform.GetComponent<Renderer>().material = purpleMaterial;
 
-            var bossRotatingFiringComponents = theBoss.GetComponents<BossRotatingFiring>();
+            var bossRotatingFiringComponents = theBoss.GetComponents<RotatingBossWeapons>();
             foreach (var bossRotatingFiringComponent in bossRotatingFiringComponents)
             {
                 Destroy(bossRotatingFiringComponent);
             }
 
             yield return new WaitForSeconds(1.95f);
-            phaseShifted = true;
-            angleOfBullets1 = 0;
-            angleOfBullets2 = 90;
-            angleOfBullets3 = 180;
-            angleOfBullets4 = 270;
+
+            AddRotatingFiringBoss(0, 55, 11, bulletMaterial);
+            AddRotatingFiringBoss(90, 55, 11, bulletMaterial);
+            AddRotatingFiringBoss(180, 55, 11, bulletMaterial);
+            AddRotatingFiringBoss(270, 55, 11, bulletMaterial);
         }
     }
 }

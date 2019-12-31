@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.New.UnitFiring.BossFiring
+namespace Assets.Scripts.New.UnitFiring.BossWeapons
 {
-    public class BossRotatingFiring : UnitFiring
+    public class RotatingBossWeapons : UnitFiring
     {
         public GameObject bulletPool;
         public Material material;
