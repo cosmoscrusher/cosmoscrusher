@@ -2,11 +2,12 @@
 
 namespace Assets.Scripts.New.UnitFiring.BossFiring
 {
-    public class BossStraightFiring : UnitFiring
+    public class BossRotatingFiring : UnitFiring
     {
         public GameObject bulletPool;
         public Material material;
         public float angle;
+        public float rateOfChangeOfAngles;
         public int layer;
 
         public bool gameOver;
@@ -35,6 +36,16 @@ namespace Assets.Scripts.New.UnitFiring.BossFiring
             {
                 firingDelay = 0;
 
+                angle %= 360;
+
+                if (paused)
+                {
+                    return;
+                }
+
+                angle += rateOfChangeOfAngles * Time.deltaTime;
+
+
                 var bullet = GetNonActiveBullet(bulletPool);
                 InitiateBullet(bulletPool, bullet, angle);
 
@@ -53,7 +64,6 @@ namespace Assets.Scripts.New.UnitFiring.BossFiring
 
         public void InitiateBullet(GameObject bulletPool, Bullet bullet, float angle)
         {
-
             bullet.gameObject.transform.GetComponent<Renderer>().material = material;
             bullet.tier = 5;
             bullet.gameObject.layer = layer;

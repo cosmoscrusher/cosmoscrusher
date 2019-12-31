@@ -63,7 +63,9 @@
      <Compile Include="Assets\Scripts\HUDManager.cs" />
      <Compile Include="Assets\Scripts\LevelLoader.cs" />
      <Compile Include="Assets\Scripts\MenuManager.cs" />
+     <Compile Include="Assets\Scripts\New\Pause.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\AiPilotFiring.cs" />
+     <Compile Include="Assets\Scripts\New\UnitFiring\BossFiring\BossRotatingFiring.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\BossFiring\BossStraightFiring.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\Tier1PilotFiring\AiTier1PilotFiring.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\Tier2PilotFiring\AiTier2PilotFiring.cs" />
