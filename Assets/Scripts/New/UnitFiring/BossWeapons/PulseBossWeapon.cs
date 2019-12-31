@@ -79,26 +79,6 @@ namespace Assets.Scripts.New.UnitFiring.BossWeapons
                     firing = true;
                 }
             }
-            //if (firing)
-            //{
-            //    firingDelay = 0;
-
-            //    angle %= 360;
-
-            //    if (paused)
-            //    {
-            //        return;
-            //    }
-
-            //    angle += rateOfChangeOfAngles * Time.deltaTime;
-
-
-            //    var bullet = GetNonActiveBullet(bulletPool);
-            //    InitiateBullet(bulletPool, bullet, angle);
-
-            //    firing = false;
-            //}
-
         }
 
         //public void InitiateBullet(GameObject bulletPool, Bullet bullet, float angle)

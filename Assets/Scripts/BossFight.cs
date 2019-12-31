@@ -40,14 +40,11 @@ namespace Assets.Scripts
         private bool floodSwitch = false;
         private float floodDelayTime = 0;
         private Ship playerShip;
-        private bool pulse = false;
-        private float pulseDelay = 0.0f;
         private bool gameOver = false;
 
         int counter = 0;
         int numBullets = 2000;
         bool paused = false;
-        private bool phaseShifted = false;
         private bool shiftStarted = false;
 
         void Awake()
@@ -514,8 +511,6 @@ namespace Assets.Scripts
             AddStraightFiringBoss(270, 11, bulletMaterial);
 
             yield return new WaitForSeconds(1);
-
-            phaseShifted = true;
 
             var bossStraightWeaponComponents = theBoss.GetComponents<StraightBossWeapons>();
             foreach (var bossStraightWeaponComponent in bossStraightWeaponComponents)
