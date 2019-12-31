@@ -102,6 +102,29 @@ namespace Assets.Scripts
             straightFiring1.material = weaponMaterial;
         }
 
+        private void AddBossPulseWeapon()
+        {
+            var pulseWeapon = theBoss.AddComponent<PulseBossWeapon>();
+            pulseWeapon.bulletPool = bulletPool;
+
+            var greenPulseData = new PulseBulletData
+            {
+                BulletMaterial = greenMaterial,
+                BulletLayer = 15,
+                BossLayer = 20
+            };
+
+            var bluePulseData = new PulseBulletData
+            {
+                BulletMaterial = blueMaterial,
+                BulletLayer = 14,
+                BossLayer = 19
+            };
+
+            pulseWeapon.pulseBulletData.Add(greenPulseData);
+            pulseWeapon.pulseBulletData.Add(bluePulseData);
+        }
+
         private void GenerateBullets()
         {
             //tier count * 20
@@ -143,11 +166,6 @@ namespace Assets.Scripts
                 if (theBoss.GetComponent<BossHealth>().shield > 0)
                 {
                     Flood();
-                }
-
-                else if (phaseShifted)
-                {
-                    Pulse();
                 }
 
                 else if (!shiftStarted)
@@ -279,67 +297,6 @@ namespace Assets.Scripts
 
             Debug.LogError("NOT Enough Bullets");
             return null;
-        }
-
-        private void Pulse()
-        {
-            if (pulse)
-            {
-                Material bulletMaterial = blueMaterial;
-                int bulletLayer = 14;
-                int bossLayer = 19;
-                if (Random.value > 0.5f)
-                {
-                    bulletMaterial = greenMaterial;
-                    bulletLayer = 15;
-                    bossLayer = 20;
-                }
-
-                for (float x = 0; x < 96; x++)
-                {
-                    Bullet theBullet = GetNonActiveBullet();
-                    theBullet.gameObject.transform.GetComponent<Renderer>().material = bulletMaterial;
-                    theBullet.tier = 5;
-                    theBullet.gameObject.layer = bulletLayer;
-                    theBullet.isEnemy = true;
-                    theBullet.isBoss = true;
-                    theBullet.isPulse = true;
-                    theBullet.isFlood = false;
-                    theBullet.angle = 3.75f * x;
-                    theBullet.transform.position = theBoss.transform.position;
-                    theBullet.gameObject.SetActive(true);
-
-                    var ps = theBullet.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-                    ps.startColor = bulletMaterial.color;
-
-                    theBullet.gameObject.transform.GetChild(0).GetComponent<ParticleSystem>().Play();
-                    theBoss.gameObject.GetComponent<Renderer>().material = bulletMaterial;
-                    theBoss.gameObject.layer = bossLayer;
-                    theBullet.GetComponent<Bullet>().startLife();
-                    if (paused)
-                    {
-                        theBullet.paused = true;
-                    }
-
-                    Transform currentTransform = theBullet.transform;
-                    currentTransform.RotateAround(theBullet.transform.position, -theBullet.transform.forward,
-                        theBullet.angle);
-                }
-
-                pulse = false;
-                pulseDelay = 0.0f;
-            }
-            else
-            {
-                if (pulseDelay < 2.5f)
-                {
-                    pulseDelay += Time.deltaTime;
-                }
-                else
-                {
-                    pulse = true;
-                }
-            }
         }
 
         void Flood()
@@ -549,13 +506,32 @@ namespace Assets.Scripts
                 Destroy(bossRotatingFiringComponent);
             }
 
-            yield return new WaitForSeconds(1.95f);
+            yield return new WaitForSeconds(1);
+
+            AddStraightFiringBoss(0, 11, bulletMaterial);
+            AddStraightFiringBoss(90, 11, bulletMaterial);
+            AddStraightFiringBoss(180, 11, bulletMaterial);
+            AddStraightFiringBoss(270, 11, bulletMaterial);
+
+            yield return new WaitForSeconds(1);
+
             phaseShifted = true;
+
+            var bossStraightWeaponComponents = theBoss.GetComponents<StraightBossWeapons>();
+            foreach (var bossStraightWeaponComponent in bossStraightWeaponComponents)
+            {
+                if (bossStraightWeaponComponent.material == bulletMaterial)
+                {
+                    Destroy(bossStraightWeaponComponent);
+                }
+            }
 
             AddRotatingFiringBoss(0, 55, 11, bulletMaterial);
             AddRotatingFiringBoss(90, 55, 11, bulletMaterial);
             AddRotatingFiringBoss(180, 55, 11, bulletMaterial);
             AddRotatingFiringBoss(270, 55, 11, bulletMaterial);
+
+            AddBossPulseWeapon();
         }
     }
 }

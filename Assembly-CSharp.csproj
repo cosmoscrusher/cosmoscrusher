@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\MenuManager.cs" />
      <Compile Include="Assets\Scripts\New\Pause.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\AiPilotFiring.cs" />
+     <Compile Include="Assets\Scripts\New\UnitFiring\BossWeapons\PulseBossWeapon.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\BossWeapons\RotatingBossWeapons.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\BossWeapons\StraightBossWeapons.cs" />
      <Compile Include="Assets\Scripts\New\UnitFiring\Tier1PilotFiring\AiTier1PilotFiring.cs" />
