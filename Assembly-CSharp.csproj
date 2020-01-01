@@ -73,6 +73,7 @@
      <Compile Include="Assets\Scripts\New\UnitRotation\UserBossRotation.cs" />
      <Compile Include="Assets\Scripts\New\UnitRotation\UserPlanetRotation.cs" />
      <Compile Include="Assets\Scripts\New\UnitWeapons\AiPilotWeapons.cs" />
+     <Compile Include="Assets\Scripts\New\UnitWeapons\BossWeapons\FloodBossWeapon.cs" />
      <Compile Include="Assets\Scripts\New\UnitWeapons\BossWeapons\PulseBossWeapon.cs" />
      <Compile Include="Assets\Scripts\New\UnitWeapons\BossWeapons\RotatingBossWeapons.cs" />
      <Compile Include="Assets\Scripts\New\UnitWeapons\BossWeapons\StraightBossWeapons.cs" />

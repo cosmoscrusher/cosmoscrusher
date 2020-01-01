@@ -91,7 +91,7 @@ namespace Assets.Scripts.New.UnitWeapons.BossWeapons
         //    bullet.gameObject.layer = layer;
         //    bullet.isEnemy = true;
         //    bullet.isBoss = true;
-        //    bullet.isPulse = false;
+        //    bullet.isPulse = true;
         //    bullet.isFlood = false;
         //    bullet.angle = angle;
         //    bullet.transform.position = transform.position;
