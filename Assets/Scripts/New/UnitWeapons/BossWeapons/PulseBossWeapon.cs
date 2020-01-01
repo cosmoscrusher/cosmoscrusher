@@ -4,9 +4,9 @@ using JetBrains.Annotations;
 
 using UnityEngine;
 
-namespace Assets.Scripts.New.UnitFiring.BossWeapons
+namespace Assets.Scripts.New.UnitWeapons.BossWeapons
 {
-    public class PulseBossWeapon : UnitFiring
+    public class PulseBossWeapon : UnitWeapons
     {
         public GameObject bulletPool;
         public List<PulseBulletData> pulseBulletData = new List<PulseBulletData>();

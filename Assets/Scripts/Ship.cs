@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
-using Assets.Scripts.New.UnitFiring;
 using Assets.Scripts.New.UnitMovement;
 using Assets.Scripts.New.UnitRotation;
+using Assets.Scripts.New.UnitWeapons;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -93,7 +93,7 @@ namespace Assets.Scripts
                     {
                         collidedShip = collision.gameObject;
                         Destroy(collidedShip.GetComponent<AiPlanetMovement>());
-                        var aiComponents = collidedShip.GetComponents<AiPilotFiring>();
+                        var aiComponents = collidedShip.GetComponents<AiPilotWeapons>();
                         foreach (var aiComponent in aiComponents)
                         {
                             Destroy(aiComponent);

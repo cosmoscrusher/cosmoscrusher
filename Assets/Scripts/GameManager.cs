@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-using Assets.Scripts.New.UnitFiring.Tier1PilotFiring;
-using Assets.Scripts.New.UnitFiring.Tier2PilotFiring;
-using Assets.Scripts.New.UnitFiring.Tier3PilotFiring;
-using Assets.Scripts.New.UnitFiring.Tier4PilotFiring;
-using Assets.Scripts.New.UnitFiring.Tier5PilotFiring;
 using Assets.Scripts.New.UnitMovement;
 using Assets.Scripts.New.UnitRotation;
+using Assets.Scripts.New.UnitWeapons.Tier1PilotWeapons;
+using Assets.Scripts.New.UnitWeapons.Tier2PilotWeapons;
+using Assets.Scripts.New.UnitWeapons.Tier3PilotWeapons;
+using Assets.Scripts.New.UnitWeapons.Tier4PilotWeapons;
+using Assets.Scripts.New.UnitWeapons.Tier5PilotWeapons;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
@@ -165,27 +165,27 @@ namespace Assets.Scripts
 
             if (tier == 1)
             {
-                var firingComponent = ship.gameObject.AddComponent<AiTier1PilotFiring>();
+                var firingComponent = ship.gameObject.AddComponent<AiTier1PilotWeapons>();
                 firingComponent.bulletPool = bulletPool;
             }
             else if (tier == 2)
             {
-                var firingComponent = ship.gameObject.AddComponent<AiTier2PilotFiring>();
+                var firingComponent = ship.gameObject.AddComponent<AiTier2PilotWeapons>();
                 firingComponent.bulletPool = bulletPool;
             }
             else if (tier == 3)
             {
-                var firingComponent = ship.gameObject.AddComponent<AiTier3PilotFiring>();
+                var firingComponent = ship.gameObject.AddComponent<AiTier3PilotWeapons>();
                 firingComponent.bulletPool = bulletPool;
             }
             else if (tier == 4)
             {
-                var firingComponent = ship.gameObject.AddComponent<AiTier4PilotFiring>();
+                var firingComponent = ship.gameObject.AddComponent<AiTier4PilotWeapons>();
                 firingComponent.bulletPool = bulletPool;
             }
             else if (tier == 5)
             {
-                var firingComponent = ship.gameObject.AddComponent<AiTier5PilotFiring>();
+                var firingComponent = ship.gameObject.AddComponent<AiTier5PilotWeapons>();
                 firingComponent.bulletPool = bulletPool;
             }
 

@@ -2,10 +2,10 @@
 
 using UnityEngine;
 
-namespace Assets.Scripts.New.UnitFiring.Tier2PilotFiring
+namespace Assets.Scripts.New.UnitWeapons.Tier2PilotWeapons
 {
     //TODO: Better Name would help
-    public class AiTier2PilotFiring : AiPilotFiring
+    public class AiTier2PilotWeapons : AiPilotWeapons
     {
         public GameObject bulletPool;
 

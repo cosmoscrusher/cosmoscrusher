@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.New.UnitFiring
+namespace Assets.Scripts.New.UnitWeapons
 {
-    public class UnitFiring : MonoBehaviour
+    public class UnitWeapons : MonoBehaviour
     {
         public Bullet GetNonActiveBullet(GameObject bulletPool)
         {

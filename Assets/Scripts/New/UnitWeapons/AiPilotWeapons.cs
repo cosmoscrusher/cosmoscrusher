@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.New.UnitFiring
+namespace Assets.Scripts.New.UnitWeapons
 {
-    public class AiPilotFiring : UnitFiring
+    public class AiPilotWeapons : UnitWeapons
     {
         public void InitiateBullet(GameObject bulletPool, Bullet bullet, float angle)
         {

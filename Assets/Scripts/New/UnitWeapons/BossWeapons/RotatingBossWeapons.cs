@@ -2,9 +2,9 @@
 
 using UnityEngine;
 
-namespace Assets.Scripts.New.UnitFiring.BossWeapons
+namespace Assets.Scripts.New.UnitWeapons.BossWeapons
 {
-    public class RotatingBossWeapons : UnitFiring
+    public class RotatingBossWeapons : UnitWeapons
     {
         public GameObject bulletPool;
         public Material material;

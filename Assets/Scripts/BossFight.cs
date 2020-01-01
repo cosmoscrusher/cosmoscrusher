@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 
 using Assets.Scripts.New.UnitAbilities;
-using Assets.Scripts.New.UnitFiring.BossWeapons;
 using Assets.Scripts.New.UnitHealth;
 using Assets.Scripts.New.UnitMovement;
 using Assets.Scripts.New.UnitRotation;
+using Assets.Scripts.New.UnitWeapons.BossWeapons;
 using Assets.Scripts.Pilots;
 
 using UnityEngine;
