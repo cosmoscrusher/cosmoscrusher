@@ -135,7 +135,8 @@ namespace Assets.Scripts
 
             if (collision.gameObject.layer == 16 || collision.gameObject.layer == 19 || collision.gameObject.layer == 20)
             {
-                var theBoss = collision.gameObject.GetComponent<BossHealth>();
+                var bossHealth = collision.gameObject.GetComponent<BossHealth>();
+                var bossShield = collision.gameObject.GetComponent<BossShield>();
                 var particleSystem = Instantiate(explosion);
                 var system = particleSystem.transform.GetComponentInChildren<ParticleSystem>();
                 system.transform.position = gameObject.transform.position;
@@ -146,7 +147,15 @@ namespace Assets.Scripts
                 system.Play();
                 gameObject.SetActive(false);
                 StopAllCoroutines();
-                theBoss.TakeDamage(1);
+
+                if (bossShield.shield > 0)
+                {
+                    bossShield.TakeDamage(1);
+                }
+                else
+                {
+                    bossHealth.TakeDamage(1);
+                }
             }
         }
         //public void startLife()

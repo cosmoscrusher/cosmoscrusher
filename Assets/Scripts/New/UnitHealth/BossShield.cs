@@ -4,22 +4,22 @@ using UnityEngine;
 
 namespace Assets.Scripts.New.UnitHealth
 {
-    public class BossHealth : MonoBehaviour
+    public class BossShield : MonoBehaviour
     {
         public BossHUD bossHUD;
 
-        public int health;
+        public int shield;
 
         [UsedImplicitly]
         public void Start()
         {
-            bossHUD.setBossHealthStats(health);
+            bossHUD.setBossShieldStats(shield);
         }
 
         public void TakeDamage(int damage)
         {
-            health -= damage;
-            health = Mathf.Clamp(health, 0, int.MaxValue);
+            shield -= damage;
+            shield = Mathf.Clamp(shield, 0, int.MaxValue);
 
             bossHUD.hitEnemy(damage);
         }

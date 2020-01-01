@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\New\Pause.cs" />
      <Compile Include="Assets\Scripts\New\UnitAbilities\UserPowerSwitch.cs" />
      <Compile Include="Assets\Scripts\New\UnitHealth\BossHealth.cs" />
+     <Compile Include="Assets\Scripts\New\UnitHealth\BossShield.cs" />
      <Compile Include="Assets\Scripts\New\UnitMovement\AiPlanetMovement.cs" />
      <Compile Include="Assets\Scripts\New\UnitMovement\UserBossMovement.cs" />
      <Compile Include="Assets\Scripts\New\UnitMovement\UserPlanetMovement.cs" />

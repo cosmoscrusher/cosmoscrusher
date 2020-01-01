@@ -67,10 +67,13 @@ namespace Assets.Scripts
             heartIndicator.canvasRenderer.SetAlpha(0.0f);
         }
 
-        public void setBossStats(int maxHealth, int maxShield)
+        public void setBossHealthStats(int maxHealth)
         {
             enemyMaxHealth = maxHealth;
             currentEnemyHealth = maxHealth;
+        }
+        public void setBossShieldStats(int maxShield)
+        {
             enemyMaxShield = maxShield;
             currentEnemyShield = maxShield;
         }

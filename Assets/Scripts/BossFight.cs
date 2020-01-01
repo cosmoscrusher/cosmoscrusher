@@ -160,7 +160,7 @@ namespace Assets.Scripts
 
             if (!gameOver)
             {
-                if (theBoss.GetComponent<BossHealth>().shield > 0)
+                if (theBoss.GetComponent<BossShield>().shield > 0)
                 {
                     Flood();
                 }
@@ -171,7 +171,7 @@ namespace Assets.Scripts
                 }
             }
 
-            if (theBoss != null && theBoss.GetComponent<BossHealth>().Health <= 0)
+            if (theBoss != null && theBoss.GetComponent<BossHealth>().health <= 0)
             {
                 soundManager.PlayBossDestruction();
                 StopAllCoroutines();
