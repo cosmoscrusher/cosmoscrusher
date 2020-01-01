@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using JetBrains.Annotations;
+
 using UnityEngine;
 
 namespace Assets.Scripts.New.UnitFiring.BossWeapons
@@ -15,7 +17,8 @@ namespace Assets.Scripts.New.UnitFiring.BossWeapons
         private bool firing;
         private float firingDelay;
 
-        void Update()
+        [UsedImplicitly]
+        public void Update()
         {
             //TODO: Find a better way to handle this.  Maybe disabling components?
             //var gameOver = GetComponent<Ship>().gameOver;

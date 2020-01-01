@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+
+using UnityEngine;
 
 namespace Assets.Scripts.New.UnitHealth
 {
@@ -9,7 +11,8 @@ namespace Assets.Scripts.New.UnitHealth
         public int Health;
         public int shield;
 
-        void Start()
+        [UsedImplicitly]
+        public void Start()
         {
             bossHUD.setBossStats(Health, shield);
         }

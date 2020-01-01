@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-using Assets.Scripts.New;
+using Assets.Scripts.New.UnitAbilities;
 using Assets.Scripts.New.UnitFiring.BossWeapons;
 using Assets.Scripts.New.UnitHealth;
 using Assets.Scripts.New.UnitMovement;
@@ -494,6 +494,7 @@ namespace Assets.Scripts
         private IEnumerator ChangePhase()
         {
             shiftStarted = true;
+
             theBoss.gameObject.layer = 21;
             theBoss.gameObject.transform.GetComponent<Renderer>().material = purpleMaterial;
 

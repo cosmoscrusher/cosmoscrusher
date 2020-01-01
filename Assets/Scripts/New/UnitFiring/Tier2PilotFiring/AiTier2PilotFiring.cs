@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+
+using UnityEngine;
 
 namespace Assets.Scripts.New.UnitFiring.Tier2PilotFiring
 {
@@ -10,7 +12,8 @@ namespace Assets.Scripts.New.UnitFiring.Tier2PilotFiring
         private bool firing;
         private float firingDelay;
 
-        void Update()
+        [UsedImplicitly]
+        public void Update()
         {
             //TODO: Find a better way to handle this.  Maybe disabling components?
             var gameOver = GetComponent<Ship>().gameOver;

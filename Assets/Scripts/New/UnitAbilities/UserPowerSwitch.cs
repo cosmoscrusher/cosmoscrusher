@@ -1,13 +1,16 @@
 ﻿using Assets.Scripts.Pilots;
 
+using JetBrains.Annotations;
+
 using UnityEngine;
 
-namespace Assets.Scripts.New
+namespace Assets.Scripts.New.UnitAbilities
 {
     //TODO: Better Name would help
     public class UserPowerSwitch : MonoBehaviour
     {
-        void Update()
+        [UsedImplicitly]
+        public void Update()
         {
             //TODO: Find a better way to handle this.  Maybe disabling components?
             var gameOver = GetComponent<Ship>().gameOver;

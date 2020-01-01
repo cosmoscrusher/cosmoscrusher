@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+
+using UnityEngine;
 
 namespace Assets.Scripts.New
 {
@@ -7,11 +9,14 @@ namespace Assets.Scripts.New
         public GameObject pausePanel;
         public GameObject gameOverPanel;
 
-        void Start()
+        [UsedImplicitly]
+        public void Start()
         {
             pausePanel.SetActive(false);
         }
-        void Update()
+
+        [UsedImplicitly]
+        public void Update()
         {
             if (!gameOverPanel.activeInHierarchy && Input.GetKeyDown(KeyCode.Escape))
             {
