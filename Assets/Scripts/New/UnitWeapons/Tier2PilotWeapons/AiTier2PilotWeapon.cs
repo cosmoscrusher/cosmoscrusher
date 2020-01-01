@@ -2,10 +2,10 @@
 
 using UnityEngine;
 
-namespace Assets.Scripts.New.UnitWeapons.Tier1PilotWeapons
+namespace Assets.Scripts.New.UnitWeapons.Tier2PilotWeapons
 {
     //TODO: Better Name would help
-    public class AiTier1PilotWeapons : AiPilotWeapons
+    public class AiTier2PilotWeapon : AiPilotWeapon
     {
         public GameObject bulletPool;
 
@@ -33,10 +33,14 @@ namespace Assets.Scripts.New.UnitWeapons.Tier1PilotWeapons
             {
                 firingDelay = 0;
 
-                var bullet = GetNonActiveBullet(bulletPool);
-                var angle = 0;
+                for (var x = 0; x < 12; x++)
+                {
 
-                InitiateBullet(bulletPool, bullet, angle);
+                    var bullet = GetNonActiveBullet(bulletPool);
+                    var angle = 30 * x;
+
+                    InitiateBullet(bulletPool, bullet, angle);
+                }
 
                 firing = false;
             }
@@ -45,7 +49,7 @@ namespace Assets.Scripts.New.UnitWeapons.Tier1PilotWeapons
             {
                 firingDelay += Time.deltaTime;
 
-                if (firingDelay >= 0.25)
+                if (firingDelay >= 2.5f)
                 {
                     firing = true;
                 }

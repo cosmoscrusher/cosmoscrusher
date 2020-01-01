@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.New.UnitWeapons
 {
-    public class UnitWeapons : MonoBehaviour
+    public class UnitWeapon : MonoBehaviour
     {
         public Bullet GetNonActiveBullet(GameObject bulletPool)
         {

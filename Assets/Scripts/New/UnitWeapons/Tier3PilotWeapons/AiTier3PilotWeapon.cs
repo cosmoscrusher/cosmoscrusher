@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Assets.Scripts.New.UnitWeapons.Tier3PilotWeapons
 {
     //TODO: Better Name would help
-    public class AiTier3PilotWeapons : AiPilotWeapons
+    public class AiTier3PilotWeapon : AiPilotWeapon
     {
         public GameObject bulletPool;
 

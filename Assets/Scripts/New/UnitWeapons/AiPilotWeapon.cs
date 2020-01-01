@@ -2,7 +2,7 @@
 
 namespace Assets.Scripts.New.UnitWeapons
 {
-    public class AiPilotWeapons : UnitWeapons
+    public class AiPilotWeapon : UnitWeapon
     {
         public void InitiateBullet(GameObject bulletPool, Bullet bullet, float angle)
         {

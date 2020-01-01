@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.New.UnitWeapons.BossWeapons
 {
-    public class PulseBossWeapon : UnitWeapons
+    public class PulseBossWeapon : UnitWeapon
     {
         public GameObject bulletPool;
         public List<PulseBulletData> pulseBulletData = new List<PulseBulletData>();

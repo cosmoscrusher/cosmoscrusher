@@ -165,27 +165,27 @@ namespace Assets.Scripts
 
             if (tier == 1)
             {
-                var weaponComponent = ship.gameObject.AddComponent<AiTier1PilotWeapons>();
+                var weaponComponent = ship.gameObject.AddComponent<AiTier1PilotWeapon>();
                 weaponComponent.bulletPool = bulletPool;
             }
             else if (tier == 2)
             {
-                var weaponComponent = ship.gameObject.AddComponent<AiTier2PilotWeapons>();
+                var weaponComponent = ship.gameObject.AddComponent<AiTier2PilotWeapon>();
                 weaponComponent.bulletPool = bulletPool;
             }
             else if (tier == 3)
             {
-                var weaponComponent = ship.gameObject.AddComponent<AiTier3PilotWeapons>();
+                var weaponComponent = ship.gameObject.AddComponent<AiTier3PilotWeapon>();
                 weaponComponent.bulletPool = bulletPool;
             }
             else if (tier == 4)
             {
-                var weaponComponent = ship.gameObject.AddComponent<AiTier4PilotWeapons>();
+                var weaponComponent = ship.gameObject.AddComponent<AiTier4PilotWeapon>();
                 weaponComponent.bulletPool = bulletPool;
             }
             else if (tier == 5)
             {
-                var weaponComponent = ship.gameObject.AddComponent<AiTier5PilotWeapons>();
+                var weaponComponent = ship.gameObject.AddComponent<AiTier5PilotWeapon>();
                 weaponComponent.bulletPool = bulletPool;
             }
 

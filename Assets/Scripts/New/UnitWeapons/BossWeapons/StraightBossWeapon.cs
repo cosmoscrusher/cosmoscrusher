@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.New.UnitWeapons.BossWeapons
 {
-    public class StraightBossWeapons : UnitWeapons
+    public class StraightBossWeapon : UnitWeapon
     {
         public GameObject bulletPool;
         public Material material;
