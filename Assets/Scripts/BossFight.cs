@@ -35,10 +35,6 @@ namespace Assets.Scripts
         public GameObject gameOverWin;
         public GameObject pauseScreen;
 
-        private bool flood = false;
-        private float floodDelay = 0.0f;
-        private bool floodSwitch = false;
-        private float floodDelayTime = 0;
         private Ship playerShip;
         private bool gameOver = false;
 
@@ -69,36 +65,36 @@ namespace Assets.Scripts
 
         private void AddBoss()
         {
-            AddStraightFiringBoss(45, 15, greenMaterial);
-            AddStraightFiringBoss(135, 14, blueMaterial);
-            AddStraightFiringBoss(225, 15, greenMaterial);
-            AddStraightFiringBoss(315, 14, blueMaterial);
+            AddStraightBossWeapon(45, 15, greenMaterial);
+            AddStraightBossWeapon(135, 14, blueMaterial);
+            AddStraightBossWeapon(225, 15, greenMaterial);
+            AddStraightBossWeapon(315, 14, blueMaterial);
 
-            AddRotatingFiringBoss(0, 55, 14, blueMaterial);
-            AddRotatingFiringBoss(90, 55, 15, greenMaterial);
-            AddRotatingFiringBoss(180, 55, 14, blueMaterial);
-            AddRotatingFiringBoss(270, 55, 15, greenMaterial);
+            AddRotatingBossWeapon(0, 55, 14, blueMaterial);
+            AddRotatingBossWeapon(90, 55, 15, greenMaterial);
+            AddRotatingBossWeapon(180, 55, 14, blueMaterial);
+            AddRotatingBossWeapon(270, 55, 15, greenMaterial);
 
             AddFloodBossWeapon();
         }
 
-        private void AddStraightFiringBoss(float angle, int layer, Material weaponMaterial)
+        private void AddStraightBossWeapon(float angle, int layer, Material weaponMaterial)
         {
-            var straightFiring1 = theBoss.AddComponent<StraightBossWeapons>();
-            straightFiring1.bulletPool = bulletPool;
-            straightFiring1.angle = angle;
-            straightFiring1.layer = layer;
-            straightFiring1.material = weaponMaterial;
+            var straightWeapon = theBoss.AddComponent<StraightBossWeapons>();
+            straightWeapon.bulletPool = bulletPool;
+            straightWeapon.angle = angle;
+            straightWeapon.layer = layer;
+            straightWeapon.material = weaponMaterial;
         }
 
-        private void AddRotatingFiringBoss(float startAngle, float angleRateOfChange, int layer, Material weaponMaterial)
+        private void AddRotatingBossWeapon(float startAngle, float angleRateOfChange, int layer, Material weaponMaterial)
         {
-            var straightFiring1 = theBoss.AddComponent<RotatingBossWeapons>();
-            straightFiring1.bulletPool = bulletPool;
-            straightFiring1.angle = startAngle;
-            straightFiring1.rateOfChangeOfAngles = angleRateOfChange;
-            straightFiring1.layer = layer;
-            straightFiring1.material = weaponMaterial;
+            var rotatingWeapon = theBoss.AddComponent<RotatingBossWeapons>();
+            rotatingWeapon.bulletPool = bulletPool;
+            rotatingWeapon.angle = startAngle;
+            rotatingWeapon.rateOfChangeOfAngles = angleRateOfChange;
+            rotatingWeapon.layer = layer;
+            rotatingWeapon.material = weaponMaterial;
         }
 
         private void AddBossPulseWeapon()
@@ -135,9 +131,9 @@ namespace Assets.Scripts
         {
             //tier count * 20
             //20 * 20
-            for (int i = 0; i < numBullets; ++i)
+            for (var i = 0; i < numBullets; ++i)
             {
-                Bullet theBullet = Object.Instantiate(bullet.GetComponent<Bullet>()) as Bullet;
+                var theBullet = Instantiate(bullet.GetComponent<Bullet>());
                 theBullet.transform.SetParent(bulletPool.transform);
                 theBullet.gameObject.SetActive(false);
             }
@@ -184,15 +180,15 @@ namespace Assets.Scripts
                 gameOver = true;
                 playerShip.gameOver = true;
 
-                var bossStraightFiringComponents = theBoss.GetComponents<StraightBossWeapons>();
-                foreach (var bossStraightFiringComponent in bossStraightFiringComponents)
+                var bossStraightWeaponComponents = theBoss.GetComponents<StraightBossWeapons>();
+                foreach (var bossStraightWeaponComponent in bossStraightWeaponComponents)
                 {
-                    bossStraightFiringComponent.gameOver = true;
+                    bossStraightWeaponComponent.gameOver = true;
                 }
-                var bossRotatingFiringComponents = theBoss.GetComponents<RotatingBossWeapons>();
-                foreach (var bossRotatingFiringComponent in bossRotatingFiringComponents)
+                var bossRotatingWeaponComponents = theBoss.GetComponents<RotatingBossWeapons>();
+                foreach (var bossRotatingWeaponComponent in bossRotatingWeaponComponents)
                 {
-                    bossRotatingFiringComponent.gameOver = true;
+                    bossRotatingWeaponComponent.gameOver = true;
                 }
                 var bossFloodWeaponComponents = theBoss.GetComponents<FloodBossWeapon>();
                 foreach (var bossFloodWeaponComponent in bossFloodWeaponComponents)
@@ -216,15 +212,16 @@ namespace Assets.Scripts
                 gameOverLose.SetActive(true);
                 Destroy(playerShip.gameObject);
                 gameOver = true;
-                var bossStraightFiringComponents = theBoss.GetComponents<StraightBossWeapons>();
-                foreach (var bossStraightFiringComponent in bossStraightFiringComponents)
+
+                var bossStraightWeaponComponents = theBoss.GetComponents<StraightBossWeapons>();
+                foreach (var bossStraightWeaponComponent in bossStraightWeaponComponents)
                 {
-                    bossStraightFiringComponent.gameOver = true;
+                    bossStraightWeaponComponent.gameOver = true;
                 }
-                var bossRotatingFiringComponents = theBoss.GetComponents<RotatingBossWeapons>();
-                foreach (var bossRotatingFiringComponent in bossRotatingFiringComponents)
+                var bossRotatingWeaponComponents = theBoss.GetComponents<RotatingBossWeapons>();
+                foreach (var bossRotatingWeaponComponent in bossRotatingWeaponComponents)
                 {
-                    bossRotatingFiringComponent.gameOver = true;
+                    bossRotatingWeaponComponent.gameOver = true;
                 }
                 var bossFloodWeaponComponents = theBoss.GetComponents<FloodBossWeapon>();
                 foreach (var bossFloodWeaponComponent in bossFloodWeaponComponents)
@@ -253,15 +250,15 @@ namespace Assets.Scripts
             pauseScreen.SetActive(true);
             playerShip.paused = true;
             paused = true;
-            var bossStraightFiringComponents = theBoss.GetComponents<StraightBossWeapons>();
-            foreach (var bossStraightFiringComponent in bossStraightFiringComponents)
+            var bossStraightWeaponComponents = theBoss.GetComponents<StraightBossWeapons>();
+            foreach (var bossStraightWeaponComponent in bossStraightWeaponComponents)
             {
-                bossStraightFiringComponent.paused = true;
+                bossStraightWeaponComponent.paused = true;
             }
-            var bossRotatingFiringComponents = theBoss.GetComponents<RotatingBossWeapons>();
-            foreach (var bossRotatingFiringComponent in bossRotatingFiringComponents)
+            var bossRotatingWeaponComponents = theBoss.GetComponents<RotatingBossWeapons>();
+            foreach (var bossRotatingWeaponComponent in bossRotatingWeaponComponents)
             {
-                bossRotatingFiringComponent.paused = true;
+                bossRotatingWeaponComponent.paused = true;
             }
             var bossFloodWeaponComponents = theBoss.GetComponents<FloodBossWeapon>();
             foreach (var bossFloodWeaponComponent in bossFloodWeaponComponents)
@@ -285,15 +282,15 @@ namespace Assets.Scripts
         {
             pauseScreen.SetActive(false);
             playerShip.paused = false;
-            var bossStraightFiringComponents = theBoss.GetComponents<StraightBossWeapons>();
-            foreach (var bossStraightFiringComponent in bossStraightFiringComponents)
+            var bossStraightWeaponComponents = theBoss.GetComponents<StraightBossWeapons>();
+            foreach (var bossStraightWeaponComponent in bossStraightWeaponComponents)
             {
-                bossStraightFiringComponent.paused = false;
+                bossStraightWeaponComponent.paused = false;
             }
-            var bossRotatingFiringComponents = theBoss.GetComponents<RotatingBossWeapons>();
-            foreach (var bossRotatingFiringComponent in bossRotatingFiringComponents)
+            var bossRotatingWeaponComponents = theBoss.GetComponents<RotatingBossWeapons>();
+            foreach (var bossRotatingWeaponComponent in bossRotatingWeaponComponents)
             {
-                bossRotatingFiringComponent.paused = false;
+                bossRotatingWeaponComponent.paused = false;
             }
             var bossFloodWeaponComponents = theBoss.GetComponents<FloodBossWeapon>();
             foreach (var bossFloodWeaponComponent in bossFloodWeaponComponents)
@@ -364,7 +361,7 @@ namespace Assets.Scripts
             movement.speed = 30;
             
             var rotation = ship.gameObject.AddComponent<UserBossRotation>();
-            rotation.camera = cam;
+            rotation.cam = cam;
 
             ship.gameObject.AddComponent<UserPowerSwitch>();
 
@@ -378,10 +375,10 @@ namespace Assets.Scripts
             theBoss.gameObject.layer = 21;
             theBoss.gameObject.transform.GetComponent<Renderer>().material = purpleMaterial;
 
-            var bossRotatingFiringComponents = theBoss.GetComponents<RotatingBossWeapons>();
-            foreach (var bossRotatingFiringComponent in bossRotatingFiringComponents)
+            var bossRotatingWeaponComponents = theBoss.GetComponents<RotatingBossWeapons>();
+            foreach (var bossRotatingWeaponComponent in bossRotatingWeaponComponents)
             {
-                Destroy(bossRotatingFiringComponent);
+                Destroy(bossRotatingWeaponComponent);
             }
 
             var bossFloodWeaponComponents = theBoss.GetComponents<FloodBossWeapon>();
@@ -392,10 +389,10 @@ namespace Assets.Scripts
 
             yield return new WaitForSeconds(1.25f);
 
-            AddStraightFiringBoss(0, 11, bulletMaterial);
-            AddStraightFiringBoss(90, 11, bulletMaterial);
-            AddStraightFiringBoss(180, 11, bulletMaterial);
-            AddStraightFiringBoss(270, 11, bulletMaterial);
+            AddStraightBossWeapon(0, 11, bulletMaterial);
+            AddStraightBossWeapon(90, 11, bulletMaterial);
+            AddStraightBossWeapon(180, 11, bulletMaterial);
+            AddStraightBossWeapon(270, 11, bulletMaterial);
 
             yield return new WaitForSeconds(0.75f);
 
@@ -408,10 +405,10 @@ namespace Assets.Scripts
                 }
             }
 
-            AddRotatingFiringBoss(0, 55, 11, bulletMaterial);
-            AddRotatingFiringBoss(90, 55, 11, bulletMaterial);
-            AddRotatingFiringBoss(180, 55, 11, bulletMaterial);
-            AddRotatingFiringBoss(270, 55, 11, bulletMaterial);
+            AddRotatingBossWeapon(0, 55, 11, bulletMaterial);
+            AddRotatingBossWeapon(90, 55, 11, bulletMaterial);
+            AddRotatingBossWeapon(180, 55, 11, bulletMaterial);
+            AddRotatingBossWeapon(270, 55, 11, bulletMaterial);
 
             AddBossPulseWeapon();
         }

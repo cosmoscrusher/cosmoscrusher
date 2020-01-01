@@ -106,7 +106,7 @@ namespace Assets.Scripts
                         movement.speed = currentMovement.speed;
 
                         var rotation = collidedShip.gameObject.AddComponent<UserPlanetRotation>();
-                        rotation.camera = currentRotation.camera;
+                        rotation.cam = currentRotation.cam;
 
                         if (hud != null)
                         {

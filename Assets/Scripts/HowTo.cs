@@ -47,7 +47,7 @@ namespace Assets.Scripts
             movement.speed = speed;
 
             var rotation = playerShip.gameObject.AddComponent<UserPlanetRotation>();
-            rotation.camera = cam;
+            rotation.cam = cam;
 
             enemyShipOne.pilot = new HowToPilot();
             enemyShipOne.material = purpleMaterial;

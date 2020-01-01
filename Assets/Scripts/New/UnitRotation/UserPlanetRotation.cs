@@ -6,7 +6,7 @@ namespace Assets.Scripts.New.UnitRotation
 {
     public class UserPlanetRotation : MonoBehaviour
     {
-        public GameObject camera;
+        public GameObject cam;
 
         [UsedImplicitly]
         void Update()
@@ -28,9 +28,9 @@ namespace Assets.Scripts.New.UnitRotation
             var currentTransform = gameObject.transform;
 
             var mouse = Input.mousePosition;
-            var cam = camera.GetComponent<Camera>();
-            mouse.x -= cam.pixelWidth / 2.0f;
-            mouse.y -= cam.pixelHeight / 2.0f;
+            var cameraComponent = cam.GetComponent<Camera>();
+            mouse.x -= cameraComponent.pixelWidth / 2.0f;
+            mouse.y -= cameraComponent.pixelHeight / 2.0f;
             mouse = Vector3.Normalize(mouse);
             var angle = Vector3.Angle(Vector3.up, mouse);
             if (mouse.x < 0)

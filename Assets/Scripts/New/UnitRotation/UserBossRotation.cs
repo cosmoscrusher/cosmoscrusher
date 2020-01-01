@@ -6,7 +6,7 @@ namespace Assets.Scripts.New.UnitRotation
 {
     public class UserBossRotation : MonoBehaviour
     {
-        public GameObject camera;
+        public GameObject cam;
 
         [UsedImplicitly]
         void Update()
@@ -28,8 +28,8 @@ namespace Assets.Scripts.New.UnitRotation
             var currentTransform = gameObject.transform;
 
             var mousePosition = Input.mousePosition;
-            var cameraComponent = camera.GetComponent<Camera>();
-            mousePosition.z = transform.position.z - camera.transform.position.z;
+            var cameraComponent = cam.GetComponent<Camera>();
+            mousePosition.z = transform.position.z - cam.transform.position.z;
             mousePosition = cameraComponent.ScreenToWorldPoint(mousePosition);
             var angleLine = Vector3.Normalize(mousePosition - transform.position);
 

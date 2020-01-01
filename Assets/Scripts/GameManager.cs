@@ -120,7 +120,7 @@ namespace Assets.Scripts
             movement.speed = speed;
 
             var rotation = ship.gameObject.AddComponent<UserPlanetRotation>();
-            rotation.camera = cam;
+            rotation.cam = cam;
 
             return ship;
         }
@@ -165,28 +165,28 @@ namespace Assets.Scripts
 
             if (tier == 1)
             {
-                var firingComponent = ship.gameObject.AddComponent<AiTier1PilotWeapons>();
-                firingComponent.bulletPool = bulletPool;
+                var weaponComponent = ship.gameObject.AddComponent<AiTier1PilotWeapons>();
+                weaponComponent.bulletPool = bulletPool;
             }
             else if (tier == 2)
             {
-                var firingComponent = ship.gameObject.AddComponent<AiTier2PilotWeapons>();
-                firingComponent.bulletPool = bulletPool;
+                var weaponComponent = ship.gameObject.AddComponent<AiTier2PilotWeapons>();
+                weaponComponent.bulletPool = bulletPool;
             }
             else if (tier == 3)
             {
-                var firingComponent = ship.gameObject.AddComponent<AiTier3PilotWeapons>();
-                firingComponent.bulletPool = bulletPool;
+                var weaponComponent = ship.gameObject.AddComponent<AiTier3PilotWeapons>();
+                weaponComponent.bulletPool = bulletPool;
             }
             else if (tier == 4)
             {
-                var firingComponent = ship.gameObject.AddComponent<AiTier4PilotWeapons>();
-                firingComponent.bulletPool = bulletPool;
+                var weaponComponent = ship.gameObject.AddComponent<AiTier4PilotWeapons>();
+                weaponComponent.bulletPool = bulletPool;
             }
             else if (tier == 5)
             {
-                var firingComponent = ship.gameObject.AddComponent<AiTier5PilotWeapons>();
-                firingComponent.bulletPool = bulletPool;
+                var weaponComponent = ship.gameObject.AddComponent<AiTier5PilotWeapons>();
+                weaponComponent.bulletPool = bulletPool;
             }
 
             ship.hitMaterial = enemyHitMaterial;
